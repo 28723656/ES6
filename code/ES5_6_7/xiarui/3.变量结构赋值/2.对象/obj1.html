@@ -67,7 +67,11 @@
   let arr = [1,2,3];
 
   let {num1,num2,num3} = arr;
-    log(num1,num2,num3);
+    log(num1,num2,num3); // undefined
+    let {0: n1,1:n2} = arr;
+    log(n1,n2) // 1 2
+    let {0:first,[arr.length -1]:last} = arr;
+    log(first,last) // 1 3
 
 
 

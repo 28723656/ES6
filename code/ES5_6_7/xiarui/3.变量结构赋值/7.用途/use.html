@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+解构赋值的用途
+
+-->
+
+<script type="text/javascript">
+
+  let log = (...filed) => {
+    const { log } = console
+    log('\t', ...filed)
+  }
+
+  log('1.作为交换变量的值')
+  let [x, y] = [1, 2];
+  [x, y] = [y, x]
+  log(x, y)
+
+  log('2.从函数返回多个值')
+
+  function f () {
+    return [1, 2, 3]
+  }
+
+  let [a, b, c] = f()
+  log(a, b, c)
+
+  function f1 () {
+    return {
+      name: 'xr',
+      age: 24
+    }
+  }
+
+  let {name,age} = f1();
+  log(name,age)
+
+    log('3.函数参数的定义')
+    function f2 ([x1,y1,z1]) {
+      return [x1+1,y1+2,z1+3]
+    }
+    let [x1,y1,z1] = f2([1,2,3])
+    log(x1,y1,z1)
+
+    log('4.遍历map')
+    const map = new Map();
+  map.set('first','hello');
+  map.set('second','world')
+    for (let [key,value] of map){
+      log(key +' is '+ value)
+    }
+
+</script>
+</body>
+</html>

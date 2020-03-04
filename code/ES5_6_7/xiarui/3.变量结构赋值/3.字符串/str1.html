@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+字符串的结构赋值
+
+-->
+
+<script type="text/javascript">
+
+  let log = (...filed) => {
+    const {log} = console;
+    log('\t', ...filed)
+  }
+
+  log('1.一个简单的字符串解构的例子')
+  const [a,b,c,d,e,f] = 'hello'
+    log(a,b,c,d,e,f); // h e l l o undefined
+
+    log('2.字符串的length属性')
+    let {length:len} = 'hello'
+    log(len)
+
+
+
+
+</script>
+</body>
+</html>
