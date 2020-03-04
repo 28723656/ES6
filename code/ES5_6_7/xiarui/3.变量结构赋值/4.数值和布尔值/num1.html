@@ -13,19 +13,18 @@
 <script type="text/javascript">
 
   let log = (...filed) => {
-    const {log} = console;
+    const { log } = console
     log('\t', ...filed)
   }
 
+  let { toString: s } = 123
+  log(s === Number.prototype.toString) // true
 
-  let {toString:s} = 123;
-  log(s === Number.prototype.toString); // true
-
-  let {toString: s1} = true;
+  let { toString: s1 } = true
   s1 === Boolean.prototype.toString // true
 
-    log('解构赋值的规则是，只要等号右边的值不是对象或数组，就先将其转为对象。由于undefined和null无法转为对象，所以对它们进行解构赋值，都会报错。')
-    let {a} = undefined;
+  log('解构赋值的规则是，只要等号右边的值不是对象或数组，就先将其转为对象。由于undefined和null无法转为对象，所以对它们进行解构赋值，都会报错。')
+  let { a } = undefined
 
 
 </script>
