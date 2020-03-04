@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_let关键字</title>
+</head>
+<body>
+
+<!--
+typeof 能返回的类型，是字符串类型
+
+number,
+string,
+boolean,
+undefined,
+object,
+function
+
+
+-->
+<script type="text/javascript">
+
+
+    // 1.判断一个东西为undefined的方法
+    let undefinedTest = undefined
+    if (undefinedTest === undefined) {    // 第一种：
+        console.log('是undefined！')
+        console.log(typeof undefinedTest)   // undefined   注意是字符串类型
+    }
+    if (typeof undefinedTest === "undefined") {  // 第二种
+        console.log('是undefined！')
+    }
+    console.log('-------------------------------')
+
+    // 2.判断一个东西是否为  null
+    let nullTest = null
+    if(nullTest === null){              // 第一种
+        console.log('是null');
+        console.log(typeof nullTest)         // object
+    }
+    console.log('-------------------------------')
+
+    // 3.判断一个对象是否为 NaN
+    let NaNTest = 0/0
+    console.log(NaNTest)
+    console.log(typeof NaNTest)   // number
+    if(isNaN(NaNTest)){                         // 第一种
+        console.log('是 NaN')
+    }
+    console.log('-------------------------------')
+
+    // 4.判断一个为{}的对象
+    let data ={}
+    console.log(data)     // {}
+    console.log(typeof data)   // object
+    if(JSON.stringify(data) === '{}'){      // 第一种  ---推荐
+        console.log('是{}')
+    }
+    let arr =Object.keys(data);
+    if(arr.length === 0){
+        console.log('是{}')          //   第二种
+    }
+    console.log('-------------------------------')
+
+    // 5.判断一个对象是否为 []
+    let arrTest = []
+    console.log(arrTest)    // []
+    console.log(typeof arrTest)    // object
+    if(arrTest.length === 0 ){
+        console.log('是 []')     // 第一种
+    }
+
+
+
+
+
+
+
+
+</script>
+</body>
+
+</html>

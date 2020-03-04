@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象的结构赋值
+
+-->
+
+<script type="text/javascript">
+
+  let log = (...filed) => {
+    const {log} = console;
+    log('\t', ...filed)
+  }
+
+  let warn = (...filed) => {
+    const {warn} = console;
+    warn('\t', ...filed)
+  }
+
+  console.log('一.对象-----------------')
+  console.log(' 1.简介-----------------')
+
+  let { a, c, b } = { a: 'aaa', b: 'bbb' }
+  log(a, b, c) // aaa bbb undefined
+
+    let {d:newD,e:newE} = {d:'ddd',e:'eee'}
+  log(newD,newE) // ddd eee
+
+  warn('也就是说，对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者')
+
+  let obj = {
+    p: [
+      'Hello',
+      { y: 'World' }
+    ]
+  };
+
+  let {p:[h,{y:w}]} = obj;
+  log(h,w)
+
+
+  const node = {
+    loc: {
+      start: {
+        line: 1,
+        column: 5
+      }
+    }
+  };
+
+  const {loc:loc1,loc:{start:{line:line1,column:column1}}} = node;
+  log('loc=',loc1,'line=',line1,'column=',column1)
+
+
+  console.log(' 2.注意点-----------------')
+
+  let err;
+ /* {x} = {x: 1};// 错误的写法*/
+  ({err} = {err: 1}) // 正确的写法
+
+
+
+</script>
+</body>
+</html>

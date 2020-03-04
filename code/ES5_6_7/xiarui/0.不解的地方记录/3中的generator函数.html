@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+数组的结构赋值
+
+-->
+
+<script type="text/javascript">
+  function* fibs() {
+    let a = 0;
+    let b = 1;
+    while (true) {
+      yield a;
+      [a, b] = [b, a + b];
+    }
+  }
+
+  let [first, second, third, fourth, fifth, sixth] = fibs();
+  sixth // 5
+
+</script>
+</body>
+</html>

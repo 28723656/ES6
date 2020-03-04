@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+1. 指数运算符(幂): **
+2. Array.prototype.includes(value) : 判断数组中是否包含指定value
+
+-->
+<script type="text/javascript">
+
+  // 1---------------
+  console.log('---------1----------')
+  {
+    var a = 1
+    let b = 10
+  }
+
+  console.log(a) // 1
+  // console.log(b) // erros: Uncaught ReferenceError: b is not defined
+  // 2-----------------
+  console.log('---------2----------')
+  for (let i = 0; i < 10; i++) {
+
+  }
+
+  console.log(i) //
+
+  console.log('--------------3---------------')
+  var a = []
+  for (var i = 0; i < 10; i++) {
+    a[i] = function () {
+      console.log(i)
+    }
+  }
+  a[6]() // 10
+
+  let a1
+  console.log(typeof a1)
+  var a = 123
+  console.log(a)
+
+    console.log('------------------4---------------');
+  var tmp = new Date();
+
+  function f() {
+    console.log(tmp);
+    if (false) {
+      var tmp = 'hello world';
+    }
+  }
+
+  f(); // undefined
+
+    console.log('------------5---------------')
+  {{{
+    let test = 'Hello';
+    {let test = 'Hello2'}
+  }}}
+
+
+
+</script>
+</body>
+</html>
