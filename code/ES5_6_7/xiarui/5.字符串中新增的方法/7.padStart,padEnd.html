@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+String
+2020年3月5日23:02:15
+-->
+
+<script type="text/javascript">
+
+  let log = (...filed) => {
+    const { log } = console
+    log('\t', ...filed)
+  }
+
+  // 如果某个字符串不够指定长度，会在头部或尾部补全
+  // padStart 用于头部补全
+  log('xr'.padStart(5, 'ab')) // abaxr
+  log('xr'.padStart(4, 'ab'))  // abxr
+  log('bb'.padStart(4, 'xx'))  // xxbb
+
+  log('我本来就很长好吗'.padStart(5, '帮你加长'))// 我本来就很长好吗
+
+  log('我'.padEnd(5)) // 默认用空格补全
+
+  //padEnd()用于尾部补全
+  log('他是如此的'.padEnd(10, '帅') + '!')
+  log('不需要你加小尾巴'.padEnd(5, '加上小尾巴咯')) // 不需要你加小尾巴
+
+
+</script>
+</body>
+</html>

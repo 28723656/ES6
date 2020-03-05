@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+String
+2020年3月5日23:02:15
+-->
+
+<script type="text/javascript">
+
+  let log = (...filed) => {
+    const { log } = console
+    log('\t', ...filed)
+  }
+
+  log(' I am you '.trim())
+  log(' I am you '.trimStart()) // 同trimLeft
+  log(' I am you '.trimEnd())  // 同trimRight
+
+
+</script>
+</body>
+</html>

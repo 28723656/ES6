@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+解构赋值的用途
+2020年3月4日23:30:34
+-->
+
+<script type="text/javascript">
+
+  let log = (...filed) => {
+    const { log } = console
+    log('\t', ...filed)
+  }
+
+  log('1.字符的')
+  log('\u0061', '\u0061' === 'a')
+  log('\u{a}\u{42}\u{43}')
+
+
+</script>
+</body>
+</html>

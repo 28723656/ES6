@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+ 字符串的遍历
+-->
+
+<script type="text/javascript">
+
+  let log = (...filed) => {
+    const { log } = console
+    log('\t', ...filed)
+  }
+
+  for (let code of 'hello world') {
+    log(code)
+  }
+
+  let text = String.fromCodePoint(0x20BB7)
+
+  log(text, text.length)
+
+  for (let i of text) {
+    log(i)
+  }
+
+  let charA = 'A'
+  log(charA.charCodeAt(0))
+
+
+</script>
+</body>
+</html>
