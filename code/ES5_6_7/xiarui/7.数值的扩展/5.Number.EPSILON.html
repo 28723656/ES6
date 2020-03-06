@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+String
+2020年3月6日18:20:47
+-->
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    function checkEquals (result, aimResult) {
+        return Math.abs(result - aimResult) < Number.EPSILON * 100
+    }
+
+    log(Number.EPSILON, Number.EPSILON === Math.pow(2, -52))  // 2.220446049250313e-16 true
+
+    // Number.EPSILON实际上是 JavaScript 能够表示的最小精度。误差如果小于这个值，就可以认为已经没有意义了，即不存在误差了
+
+    log('-------一个常见的错误--------')
+    console.log('0.1+0.2 = 0.3?', 0.1 + 0.2 === 0.3)
+    console.log('0.1+0.2 结果为', 0.1 + 0.2)
+
+    console.log(checkEquals(0.1 + 0.2, 0.3))
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+String
+2020年3月6日18:20:47
+-->
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // Number.isInteger()用来判断一个数值是否为整数。
+
+    log(Number.isInteger(12))  // true
+    log(Number.isInteger(12.000000))// true
+    log(Number.isInteger(12.1))  // 下面全 false
+    log(Number.isInteger('12'))
+    log(Number.isInteger(null))
+    log(Number.isInteger(true))
+
+    // 精度问题异常 --例外
+    log(Number.isInteger(3.0000000000000002))// true
+
+
+</script>
+</body>
+</html>

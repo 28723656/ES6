@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+String
+2020年3月6日18:20:47
+-->
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    log(0b111110111 === 503) // 二进制
+    log(0o767 === 503)  // 八进制
+
+    log(Number('0b111'))  // 二进制转10进制
+    log(Number('0o10'))   // 八进制转二进制
+
+
+</script>
+</body>
+</html>
