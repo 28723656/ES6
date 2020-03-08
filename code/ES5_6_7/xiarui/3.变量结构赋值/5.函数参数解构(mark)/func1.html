@@ -12,54 +12,54 @@
 
 <script type="text/javascript">
 
-  let log = (...filed) => {
-    const { log } = console
-    log('\t', ...filed)
-  }
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
 
-  function add ([x, y]) {
-    return x + y
-  }
+    function add ([x, y]) {
+        return x + y
+    }
 
-  log(add([1, 2]))
+    log(add([1, 2]))
 
-  const sumNumber = [[7, 1, 2, 6], [3, 4]].map(([a, b]) => a + b)
-  log(sumNumber)
-  log('解释：对每个数组的前两个值进行相加，组成新的数组')
+    const sumNumber = [[7, 1, 2, 6], [3, 4]].map(([a, b]) => a + b)
+    log(sumNumber)
+    log('解释：对每个数组的前两个值进行相加，组成新的数组')
 
-  function move ({ x = 1, y = 2 } = {}) {
-    return [x, y]
-  }
+    function move ({ x = 1, y = 2 } = {}) {
+        return [x, y]
+    }
 
-  let x
-  let y
-  log(move({ x: 3, x: 4 })) // [4,2]
-  log(move({ x: 3, y: 4 })) // [3,4]
-  log(move({ x, y })) // [1,2]
-  log(move({ x: null, y })) // [null,2]
-  log(move({ x: undefined })) // [1,2]
-  log(move({})) // [1,2]
-  log('解读上面的答案')
-  let { x1, y1 } = {}
-  log(x1, y1, '因为传递{}，解构的x1，y1都是undefined，所以x=1，y=2')
-  // fixme:不知道为什么
-  log(move()) // [1,2]
-  log('解读上面的答案')
+    let x
+    let y
+    log(move({ x: 3, x: 4 })) // [4,2]
+    log(move({ x: 3, y: 4 })) // [3,4]
+    log(move({ x, y })) // [1,2]
+    log(move({ x: null, y })) // [null,2]
+    log(move({ x: undefined })) // [1,2]
+    log(move({})) // [1,2]
+    log('解读上面的答案')
+    let { x1, y1 } = {}
+    log(x1, y1, '因为传递{}，解构的x1，y1都是undefined，所以x=1，y=2')
+    // fixme:不知道为什么
+    log(move()) // [1,2]
+    log('解读上面的答案')
 
-  function move1 ({ x, y } = { x: 1, y: 2 }) {
-    return [x, y]
-  }
+    function move1 ({ x, y } = { x: 1, y: 2 }) {
+        return [x, y]
+    }
 
-  log(move1({ x: 3, x: 4 })) // [4,undefined]
-  log(move1({ x: 3, y: 4 })) // [3,4]
-  log(move1({ x: undefined, y: undefined })) // [1,2]wrong   [undefined,undefined]true
-  log(move1({ x: null, y })) // [null,undefined]
-  log(move1({ x: undefined })) // [1,2]wrong  [undefined,undefined] true
-  log(move1({})) // [1,2]wrong [undefined,undefined] true
-  log(move1()) // [1,2]
+    log(move1({ x: 3, x: 4 })) // [4,undefined]
+    log(move1({ x: 3, y: 4 })) // [3,4]
+    log(move1({ x: undefined, y: undefined })) // [1,2]wrong   [undefined,undefined]true
+    log(move1({ x: null, y })) // [null,undefined]
+    log(move1({ x: undefined })) // [1,2]wrong  [undefined,undefined] true
+    log(move1({})) // [1,2]wrong [undefined,undefined] true
+    log(move1()) // [1,2]
 
-  const resultMap = [1, undefined, 3].map((x = null) => x)
-  log(resultMap)
+    const resultMap = [1, undefined, 3].map((x = null) => x)
+    log(resultMap)
 
 
 </script>

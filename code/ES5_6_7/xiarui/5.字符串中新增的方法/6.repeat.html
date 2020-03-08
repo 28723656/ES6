@@ -12,28 +12,28 @@ String
 
 <script type="text/javascript">
 
-  let log = (...filed) => {
-    const { log } = console
-    log('\t', ...filed)
-  }
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
 
-  //repeat方法返回一个新字符串，表示将原字符串重复n次。
-  log('xr'.repeat(3))  // xrxrxr
-  log('xr'.repeat(0))  //
-  log('xr'.repeat(2.8))  // xrxr
-  log('xr'.repeat(-0.2))  //
-  //  log('xr'.repeat(-1.2))  //报错
-  log('xr'.repeat(NaN))  // (等于repeat(0))
-  log('xr'.repeat('12'))  // （会转换成字符串）重复12次
-  log('xr'.repeat('a3'))  // （会转换成字符串）重复0次
-  log('xr'.repeat('3a'))  // （会转换成字符串）重复0次
-  log('xr'.repeat('a3a'))  // （会转换成字符串）重复0次
+    //repeat方法返回一个新字符串，表示将原字符串重复n次。
+    log('xr'.repeat(3))  // xrxrxr
+    log('xr'.repeat(0))  //
+    log('xr'.repeat(2.8))  // xrxr
+    log('xr'.repeat(-0.2))  //
+    //  log('xr'.repeat(-1.2))  //报错
+    log('xr'.repeat(NaN))  // (等于repeat(0))
+    log('xr'.repeat('12'))  // （会转换成字符串）重复12次
+    log('xr'.repeat('a3'))  // （会转换成字符串）重复0次
+    log('xr'.repeat('3a'))  // （会转换成字符串）重复0次
+    log('xr'.repeat('a3a'))  // （会转换成字符串）重复0次
 
-  log('------------')
-  log(Number('12'))   // 12
-  log(Number('a12'))  // NaN
-  log(Number('12a'))  // NaN
-  log(Number('a12a'))  // NaN
+    log('------------')
+    log(Number('12'))   // 12
+    log(Number('a12'))  // NaN
+    log(Number('12a'))  // NaN
+    log(Number('a12a'))  // NaN
 
 
 </script>

@@ -12,41 +12,41 @@
 
 <script type="text/javascript">
 
-  let log = (...filed) => {
-    const { log } = console
-    log('\t', ...filed)
-  }
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
 
-  // 普通字符串
-  log(`I am the King Of The World !'\n' `)
-  log(`In JavaScript '\\n' is a line-feed.`)
+    // 普通字符串
+    log(`I am the King Of The World !'\n' `)
+    log(`In JavaScript '\\n' is a line-feed.`)
 
-  // 多行文本
-  log(` I can write this
+    // 多行文本
+    log(` I can write this
      at two lines
      unbelievable，他竟然可以自动保存我的格式，
      666
     `)
 
-  // 字符串中嵌入变量
-  let name = 'Bob', time = 'today'
-  log(`Hello ${name}, how are you ${time}?`)
+    // 字符串中嵌入变量
+    let name = 'Bob', time = 'today'
+    log(`Hello ${name}, how are you ${time}?`)
 
-  // 如果需要转义的话
-  log(`\\\`\`\`\`\\`) //  \````\
+    // 如果需要转义的话
+    log(`\\\`\`\`\`\\`) //  \````\
 
-  //模板字符串之中还能调用函数
-  function f () {
-    return '欧，我的老天爷'
-  }
+    //模板字符串之中还能调用函数
+    function f () {
+        return '欧，我的老天爷'
+    }
 
-  log(`she said: "${f()}"`)
+    log(`she said: "${f()}"`)
 
-  let a // undefined
-  log(`hello,${a}`)
+    let a // undefined
+    log(`hello,${a}`)
 
-  // 原样输出
-  log(`haha,${`笑你麻痹`}`)
+    // 原样输出
+    log(`haha,${`笑你麻痹`}`)
 
 
 </script>

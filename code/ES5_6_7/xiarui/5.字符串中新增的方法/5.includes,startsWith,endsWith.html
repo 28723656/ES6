@@ -12,23 +12,23 @@ String
 
 <script type="text/javascript">
 
-  let log = (...filed) => {
-    const { log } = console
-    log('\t', ...filed)
-  }
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
 
-  let s = 'Hello World'
+    let s = 'Hello World'
 
-  log(s.includes(' '))
-  log(s.endsWith('ld'))
-  log(s.startsWith('Hk'))
+    log(s.includes(' '))
+    log(s.endsWith('ld'))
+    log(s.startsWith('Hk'))
 
-  //这三个方法都支持第二个参数，表示开始搜索的位置。
-  let a = '0123456789'
-  log('----------------------')
-  log(a.startsWith('6789', 6))// 首位为0，从第6个包括自己开始
-  log(a.includes('6789', 6))   // 同上
-  log(a.endsWith('345', 6))   // 不同，这个是针对前n个字符
+    //这三个方法都支持第二个参数，表示开始搜索的位置。
+    let a = '0123456789'
+    log('----------------------')
+    log(a.startsWith('6789', 6))// 首位为0，从第6个包括自己开始
+    log(a.includes('6789', 6))   // 同上
+    log(a.endsWith('345', 6))   // 不同，这个是针对前n个字符
 
 </script>
 </body>

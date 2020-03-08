@@ -12,15 +12,15 @@ String
 
 <script type="text/javascript">
 
-  let log = (...filed) => {
-    const { log } = console
-    log('\t', ...filed)
-  }
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
 
-  log(String.raw`Hi\n${2 + 3}!`) //Hi\n5!
+    log(String.raw`Hi\n${2 + 3}!`) //Hi\n5!
 
-  log(String.raw`Hi\\n`) //Hi\\n
-  log(String.raw`Hi\\n` === 'Hi\\\\n')
+    log(String.raw`Hi\\n`) //Hi\\n
+    log(String.raw`Hi\\n` === 'Hi\\\\n')
 
 </script>
 </body>

@@ -12,34 +12,34 @@ String
 
 <script type="text/javascript">
 
-  let log = (...filed) => {
-    const { log } = console
-    log('\t', ...filed)
-  }
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
 
-  let s = '𠮷你太美' // 吉 2 你1 太1 美1
-  log(s.length)  // 5
+    let s = '𠮷你太美' // 吉 2 你1 太1 美1
+    log(s.length)  // 5
 
-  log(s.charAt(0)) // 乱码：�
-  log(s.charAt(1))  // 乱码：�
-  log(s.charCodeAt(0)) //55362
-  log(s.charCodeAt(1)) //57271
+    log(s.charAt(0)) // 乱码：�
+    log(s.charAt(1))  // 乱码：�
+    log(s.charCodeAt(0)) //55362
+    log(s.charCodeAt(1)) //57271
 
-  let skr = '𠮷a'
-  console.log('------------------------')
-  log(skr.length)
-  log(skr.codePointAt(0))
-  log(skr.codePointAt(1))
-  log(skr.codePointAt(2))
+    let skr = '𠮷a'
+    console.log('------------------------')
+    log(skr.length)
+    log(skr.codePointAt(0))
+    log(skr.codePointAt(1))
+    log(skr.codePointAt(2))
 
-  log(skr.codePointAt(0).toString(2)) // 结果转为2进制
-  log(skr.codePointAt(0).toString(16)) // 结果转为16进制
+    log(skr.codePointAt(0).toString(2)) // 结果转为2进制
+    log(skr.codePointAt(0).toString(16)) // 结果转为16进制
 
-  console.log('------------------------')
+    console.log('------------------------')
 
-  // 震惊！！ toString，竟然是转换进制的方法
-  let num = 28723656  // 1100
-  log(num.toString(16))
+    // 震惊！！ toString，竟然是转换进制的方法
+    let num = 28723656  // 1100
+    log(num.toString(16))
 
 </script>
 </body>
