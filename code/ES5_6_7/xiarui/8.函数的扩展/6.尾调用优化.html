@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+函数
+2020年3月8日19:57:21
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 概念：某个函数的最后一步是调用另一个函数。
+    g = () => {}
+
+    function f (x) {
+        return g(x)
+    }
+
+    // 尾调用优化，目前只有 Safari 浏览器支持尾调用优化，Chrome 和 Firefox 都不支持。
+    log('---例子---')
+
+    function factorial (n) {
+        if (n === 1) return 1
+        return n * factorial(n - 1)
+    }
+
+    factorial(5) //
+
+
+    // 改写后
+    function Fibonacci2 (n , ac1 = 1 , ac2 = 1) {
+        if( n <= 1 ) {return ac2};
+
+        return Fibonacci2 (n - 1, ac2, ac1 + ac2);
+    }
+
+    Fibonacci2(100) // 573147844013817200000
+
+    // 如果觉得参数太多，可以改写成这样
+    function factorial(n, total = 1) {
+        if (n === 1) return total;
+        return factorial(n - 1, n * total);
+    }
+
+    factorial(5) // 120
+    // fixme:后面有些难以理解
+
+
+</script>

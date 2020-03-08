@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+String
+2020年3月6日18:20:47
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 超过 53 个二进制位的数值，无法保持精度
+    log(Math.pow(2, 53) === Math.pow(2, 53) + 1) // true
+
+    // 超过 2 的 1024 次方的数值，无法表示
+    log(Math.pow(2, 1024)) //Infinity
+
+    // 为了与 Number 类型区别，BigInt 类型的数据必须添加后缀n
+    const a = 2172141653n
+    const b = 15346349309n
+    log(a * b, typeof (a * b))  // 33334444555566667777n  bigint
+    log(Number(a) * Number(b))  //33334444555566670000
+
+    // fixme: 学习这个网站 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof
+    log(1n == 1) // true
+    log(1n === 1)  // false
+
+    let result = 0n
+    for (let i = 1n; i <= 64n; i++) {
+        result += 2n ** (i - 1n)
+    }
+    log(result)  // 18446744073709551615n
+
+    let result2 = 0
+    log(Number.MAX_SAFE_INTEGER)
+    log('----可以看出：超过这个安全数值，精度就开始丢失了----')
+    for (let i = 1; i <= 64; i++) {
+        result2 += 2 ** (i - 1)
+    }
+    log(result2)  // 18446744073709552000
+
+    log(Number(2 ** 54))
+    log(2 ** 54)
+    log(Number(2 ** 53))
+
+
+</script>

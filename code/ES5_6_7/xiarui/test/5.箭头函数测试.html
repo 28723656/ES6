@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+函数
+2020年3月8日19:57:21
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+
+    function MyArr(){
+
+
+        insert = (...arr) =>[]
+    }
+
+    // 嵌套箭头函数
+    // 做一个可以让数组连续push的函数
+    //  todo:我只是标记一下，这个方法第一次见
+    let insert = (...array) => ({
+        push: (value) => [...array, value],
+        pop:(value) => [value,...array],
+        shift:() => []
+    })
+
+
+
+    log(insert(1,2,3).push(6))
+    log(insert(1,2,3).pop(6))
+
+
+
+</script>

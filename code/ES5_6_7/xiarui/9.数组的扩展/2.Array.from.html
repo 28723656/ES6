@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+数组
+2020年3月8日23:08:00
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    /*
+        Array.from方法用于将两类对象转为真正的数组：
+        类似数组的对象（array-like object）和
+        可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）。
+     */
+
+    /*
+         Array(3)
+         0: "a"
+         1: "b"
+         2: "c"
+         length: 3
+     */
+    log(['a', 'b', 'c'])
+
+    let arrayLike = {
+        '0': 'a',
+        '1': 'b',
+        '2': 'c',
+        length: 5
+    }
+
+    let arr = Array.from(arrayLike);
+    log(arr)
+
+
+</script>

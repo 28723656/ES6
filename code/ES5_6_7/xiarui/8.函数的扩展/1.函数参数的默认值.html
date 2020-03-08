@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+String
+2020年3月6日18:20:47
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    function f1 ({ x = 1, y = 2 } = {}) {
+        log([x, y])
+    }
+
+    function f2 ({ x, y } = { x: 1, y: 2 }) {
+        log([x, y])
+    }
+
+    function f3 ({ x = 1, y = 2 } = { x: 2, y: 1 }) {
+        log([x, y])
+    }
+
+    function f4 (x, y) {
+    }
+
+    f1()  // [1,2]
+    f2()  // [1,2]
+    f3()  // [2,1]
+    log('------')
+
+    f1({})  // [1,2]
+    f2({})  // [undefined,undefined]
+    f3({})  // [1,2]
+    log('------')
+
+    f1({ x: 3 })  // [3,2]
+    f2({ x: 3 })  // [3,undefined]
+    f3({ x: 3 })  // [3,2]
+    log('------')
+
+    f1({ x: null, y: undefined })  // [null,2]
+    f2({ x: null, y: undefined })  // [null,undefined]
+    f3({ x: null, y: undefined })  // [null,2]
+    log('------')
+
+    // 我的理解，如果穿了值，就不需要管后面的默认值了。
+    // 第二部，根据左边的默认值再判断一次
+
+    /**
+     * 指定了默认值以后，函数的length属性，将返回没有指定默认值的参数个数。
+     * 也就是说，指定了默认值后，length属性将失真。
+     */
+
+    log('---函数的length属性---')
+    log(f4.length) // 2
+    log(f2.length) // 0
+
+
+    log('---作用域---很重要---')
+
+    let a = 1;
+    function func1 (a,b =a) {
+        log(b)
+    }
+
+    function func2 (b =a) {
+        log(b)
+    }
+
+    func1(2);  // 2
+    func2(2); //2
+    func2(); // 1
+
+    function func3 (m,n) {
+        log(1,m,n)
+    }
+
+    func3(2)
+
+    // fixme:8，作用域这一块没有搞懂
+
+
+
+
+
+</script>

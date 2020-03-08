@@ -17,10 +17,55 @@ String
         log('\t', ...filed)
     }
 
+    //JavaScript 能够准确表示的整数范围在-2^53到2^53之间（不含两个端点）
     log(Math.pow(2, 53)) //9007199254740992
     log(Math.pow(2, 53) + 100) //9007199254740992
 
     log(Math.pow(2, 53) === Math.pow(2, 53) + 1)  // true
+
+    log(Number.MAX_SAFE_INTEGER)  //9007199254740991
+    log(Number.MAX_SAFE_INTEGER === Math.pow(2, 53) - 1) // true
+
+    log(Number.MIN_SAFE_INTEGER === -Number.MAX_SAFE_INTEGER) // true
+
+    log(Number.MIN_SAFE_INTEGER === -9007199254740991)
+
+    log(Math.pow(-2, 53) + 1 === Number.MIN_SAFE_INTEGER)
+    log(Math.pow(2, 53) - 1 === Number.MIN_SAFE_INTEGER)
+
+    // 所以只有 Math.pow(-2,53)-1 <= x <=Math.pow(2,53) -1
+    // 并且为整数
+    log('---------验证--------------')
+    log(Number.isSafeInteger(0))  // true
+    log(Number.isSafeInteger(0.2))  // false
+
+    // 9007199254740991这是临界值
+
+    // 因为...93会储存为...92 ,减1后刚好等于临界值
+    log(9007199254740993) //9007199254740992
+    log(Number.isSafeInteger(9007199254740993 - 1)) // 返回true
+
+    // 使用下面的方法来判断是否为安全函数
+
+    function checkIsSafeInteger (left, right, result) {
+        if (Number.isSafeInteger(left)
+            && Number.isSafeInteger(right)
+            && Number.isSafeInteger(result)) {
+            return result
+        }
+        throw new RangeError('that is not safe Integer!')
+    }
+
+    let finalResult = 0
+    try {
+        let left = Math.pow(2, 53)
+        let right = Math.pow(2, 53) - 1
+        let result = left - right
+        finalResult = checkIsSafeInteger(left, right, result)
+        log('结果：', finalResult)
+    } catch (e) {
+        log('数据异常')
+    }
 
 
 </script>

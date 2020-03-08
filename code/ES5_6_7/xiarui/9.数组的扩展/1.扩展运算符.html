@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+函数
+2020年3月8日19:57:21
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // ES5的写法
+    log(Math.max.apply(null, [14, 3, 77]))
+
+    // es6的写法
+    Math.max(...[1, 2, 3])
+
+    let arr1 = [1, 2, 3]
+    let arr2 = [4, 5, 6]
+    arr1.push(...arr2)
+
+    // 复制数组
+    let arr3 = [...arr1, ...arr2]
+
+    const [first, ...rest] = [1, 2, 3, 4, 5]
+    // const [first,...rest,last] = [1,2,3,4,5] // 运行时报错
+    // log(first,rest,last)//
+
+    // fixme: map和set的学习
+    log('---Map,Set,Generator---')
+    let map = new Map([
+        [1, 'one'],
+        [2, 'two'],
+        [3, 'three'],
+    ])
+
+    let arr = [...map.keys()] // [1, 2, 3]
+
+    // fixme: generator的学习
+    const go = function * () {
+        yield 1
+        yield 2
+        yield 3
+    };
+
+    [...go()] // [1, 2, 3]
+
+    // 对象没有什么Iterator接口，会报错
+    const obj = { a: 1, b: 2 }
+    let arr8 = [...obj] // TypeError: Cannot spread non-iterable object
+
+
+</script>
