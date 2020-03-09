@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+数组
+2020年3月9日22:23:22
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    /*
+    数组实例的find方法，用于找出第一个符合条件的数组成员。
+    它的参数是一个回调函数，所有数组成员依次执行该回调函数，
+        直到找出第一个返回值为true的成员，然后返回该成员。
+    如果没有符合条件的成员，则返回undefined。
+     */
+
+    // fixme:学习 typeScript，可以看懂文档
+    let arr = [1, -3, -6, 2, 5]
+    let result = arr.find(x => x < 0)
+    log(result) // -3
+
+    let result2 = arr.find((value, index, theArr) => {
+        return (index + 1) % 2 === 1 && value < 0
+    })
+    log(result2)
+
+    // 如果没有找到 ,find返回 undefined
+    let result3 = arr.find(x => x > 100)
+    log(result3)
+
+    // findIndex
+
+    let result4 = arr.findIndex(x => x < 0)
+    log(result4)
+    let result5 = arr.findIndex(x => x > 100)
+
+    // 如果没有找到 ,findIndex返回 undefined
+    log(result5)
+
+    // 接收第二个参数
+    // fixme:找到为什么result6输出为undefined的原因
+    let person = { name: '张三', age: 4 }
+    let result6 = arr.find(x => x > this.age, person)
+    log(result6)
+
+    log(typeof (b => b > 12))
+
+    function f (v) {
+        return v > this.age
+    }
+
+    let person2 = { name: 'John', age: 20 }
+    let result7 = [10, 12, 26, 15].find(f, person2)    // 26
+    log(result7)
+
+    // 另外，这两个方法都可以发现NaN，弥补了数组的indexOf方法的不足。
+
+    log('-----判断一个数是非为NaN---')
+    log(NaN === NaN) // false
+    log(Number.isNaN(NaN)) // true
+
+    log([NaN].indexOf(NaN))  // -1
+    // fixme:不理解为什么返回NaN
+    log([1, NaN].find(x => Number.isNaN(x))) // 返回NaN
+
+
+</script>

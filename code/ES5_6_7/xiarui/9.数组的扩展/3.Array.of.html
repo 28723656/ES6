@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+数组
+2020年3月8日23:08:00
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // Array.of方法用于将一组值，转换为数组。
+    log(Array.of(1, 2, 3)) //[1,2,3]
+    log(Array.of(3))  // [3]
+    log(Array.of(3).length) //  1
+
+    // 对比Array()的不足
+    //只有当参数个数不少于 2 个时，Array()才会返回由参数组成的新数组。参数个数只有一个时，实际上是指定数组的长度。
+    log(Array()) // []
+    log(Array(3), [, , ,], Array(3) == [, , ,], [] == [], 1 == '1') // [,,,]
+    log(Array(1, 2, 3)) // [1,2,3]
+
+    // 练习
+    log(Array.of())  // []
+    log(Array.of(undefined))  // [undefined]
+    log(Array.of(null))   // [null]
+    log(Array.of(1, 2))    //[1,2]
+
+
+</script>

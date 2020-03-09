@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+数组
+2020年3月9日22:23:22
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    /*
+    可以用for...of循环进行遍历，
+    唯一的区别是keys()是对键名的遍历、
+    values()是对键值的遍历，
+    entries()是对键值对的遍历。
+     */
+
+    for (let index of ['a', 2].keys()) {
+        log(index)  //  0,1
+    }
+
+    for (let value of ['c', 'd', 1].values()) {
+        log(value)  // c d 1
+    }
+
+    for (let [index, value] of [3, 2, 1].entries()) {
+        log([index, value]) // [0,3] [1,2] [2,1]
+    }
+
+    // 还可以用next进行遍历
+    // todo: 寻找，是否有像java一样的 entries.hasNext这样的方法
+    let letter = ['a', 'b', 'c']
+    let entries = letter.entries()
+    console.log(entries.next().value)
+    console.log(entries.next().value)
+    console.log(entries.next().value)
+
+
+</script>

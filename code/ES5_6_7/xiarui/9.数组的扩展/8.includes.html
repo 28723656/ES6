@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+数组
+2020年3月9日23:14:08
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // Array.prototype.includes方法返回一个布尔值，
+    // 表示某个数组是否包含给定的值，与字符串的includes方法类似
+
+    [1, 2, 3].includes(2);  // true
+    [1, NaN, 3].includes(NaN) // true
+
+    // 第二个参数表示从哪里开始找
+    let result1 = [1, 2, 3, NaN, undefined, null].includes(undefined, -1)
+    let result2 = [1, 2, 3, NaN, undefined, null].includes(undefined, 2)
+    log(result1)  // false
+    log(result2)  // true
+
+    // 所以可以不用 arr.indexOf(value) !== -1这个方法了
+    // 另外 indexOf方法不能找到NaN
+    let result3 = [NaN].indexOf(NaN)
+    let result4 = [NaN].includes(NaN)
+    log(result3)  // -1
+    log(result4)  // true
+
+
+</script>

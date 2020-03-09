@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+数组
+2020年3月9日23:45:58
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // todo:花时间理解一下
+    // 稳定排序
+    let arr = ['ab', 'aa', 'ad', 'ef', 'ea']
+    const stableSort = (s1, s2) => {
+        if (s1[0] < s2[0]) return -1
+        return 1
+    }
+
+    log(arr.sort(stableSort)) // ['ab','aa','ad','ef','ea']
+
+    // 非稳定排序
+    const unstableSorting = (s1, s2) => {
+        if (s1[0] <= s2[0]) return -1
+        return 1
+    }
+
+    log(arr.sort(unstableSorting)) //  ["ad", "aa", "ab", "ea", "ef"]
+
+
+</script>

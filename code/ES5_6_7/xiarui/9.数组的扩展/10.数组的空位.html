@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+数组
+2020年3月9日23:14:08
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    log(Array(3))  // [,,,]
+    // fixme:这里不懂为什么为true
+    log(0 in [undefined, undefined]) // true
+    log(false in [undefined, undefined]) // false
+    log(0 in [, ,]) // false
+
+    // 空位的处理，只讨论es6
+    // todo:这里要好好好看一下
+    log('---空位的处理----')
+    let arr = [1, , 2]
+    log(Array.from(arr))  // [1,undefined,2]
+    log([...arr])   // [1,undefined,2]
+    // log(arr.copyWithin(2, 0))  // [1,,1]
+    /*  log(arr.fill('a'))      //['a','a','a']
+      for (let i of arr) {
+          log(i)               // a a a
+      }*/
+
+    let result2 = arr.map(item => item + 'b')
+    log(result2);//  ['1b',,'2b']
+
+    // todo:下面的没有时间测试了
+
+    // entries()
+    [...[, 'a'].entries()]; // [[0,undefined], [1,"a"]]
+
+    // keys()
+    [...[, 'a'].keys()]; // [0,1]
+
+    // values()
+    [...[, 'a'].values()]; // [undefined,"a"]
+
+    // find()
+    [, 'a'].find(x => true); // undefined
+
+    // findIndex()
+    [, 'a'].findIndex(x => true) // 0
+
+</script>
