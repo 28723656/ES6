@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象
+2020年3月10日22:51:51
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 方法的name属性
+    const person = {
+        sayName () {
+            log('hello')
+        }
+    }
+    log(person.sayName.name) // sayName
+
+    let obj = {
+        get foo () {},
+        set foo (x) {},
+    }
+
+    //  log(obj.foo.name) // 报错
+    // fixme:这里不理解
+    const descriptor = Object.getOwnPropertyDescriptor(obj, 'foo');
+    log(descriptor.get.name) // get foo
+    log(descriptor.set.name) // set foo
+
+   // 有两种特殊情况：
+    // bind方法创造的函数，name属性返回bound加上原函数的名字；
+    // Function构造函数创造的函数，name属性返回anonymous。
+    log((new Function()).name) //anonymous
+    let newFun = function () {
+    }
+    log(newFun.bind().name) //bound newFun
+
+    // 还有symbol,这里不做深究
+
+</script>

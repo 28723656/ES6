@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象
+2020年3月10日22:16:44
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 方式一
+    let obj = {}
+    obj.foo = true
+    obj['a' + 'bc'] = 123
+    log(obj)// {foo:true,abc:123}
+
+    // 方式二
+    let prop1 = 'name'
+    let obj2 = {
+        [prop1]: prop1,
+        ['age']: 12,
+    }
+    log(obj2)// {name:'name',age,12}
+
+    // 方式三
+    let type = 'Lost'
+    const obj3 = {
+        'nonsense': 'nothing',
+        [type]: 'Wind'
+    }
+    log(obj3) // {nonsense: "nothing", Lost: "Wind"}
+
+    // todo:这里需要认真的看一下
+    log(obj3['nonsense']) // nothing
+    log(obj3[type])  // Wind
+    log(obj3['type']) // undefined
+    log(obj3['Lost'])  // Wind
+    log(obj3['Wind'])  // undefined
+
+    // 注意点1
+    let f1 = 'f11'
+    let f2 = 'f22'
+//    let f3 = { [f1] } // 属性名表达式与简洁表示法，不能同时使用，会报错。
+    let f3 = { f2:[f1] }
+    let f4 = { [f2]:[f1] }
+    log(f3) // {f2:['f11']}
+    log(f4) // {f22:['f11']}
+
+    // 注意点2
+    // 属性名表达式如果是一个对象
+    let testObj1 = {a:1}
+    let testObj2 = {b:2}
+
+    const testObj3 = {
+        [testObj1]:'valueA',
+        [testObj2]:'valueB',
+    }
+
+    // fixme:有点不解
+    // 解答为：上面代码中，[keyA]和[keyB]得到的都是[object Object]，
+    // 所以[keyB]会把[keyA]覆盖掉，而myObject最后只有一个[object Object]属性。
+    log(testObj3) //{[object Object]: "valueB"}
+
+</script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象
+2020年3月10日22:16:44
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    const a = 'aaa'
+    const b = { a }
+    log(b) // {a:'aaa'}
+
+    // 属性的简写
+    function f (x, y) {
+        return { x, y }
+    }
+
+    log(f(1, 2))
+
+    // 方法的简写
+    const f2 = {
+        method () {
+            return 'Hello'
+        }
+    }
+
+    // 属性赋值器 getter setter
+    const student = {
+        name: '张三',
+        get gname () {
+            return this.s
+        },
+        set sname (value) {
+            this.name = value
+        }
+    }
+
+    // 简洁写法
+    let user = { name: 'test' }
+    let ray = { age: 12 }
+    log(user, ray)
+    log({ ...user, ...ray })
+
+    // 简写的对象方法不能用作构造函数，会报错。
+
+
+</script>
