@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象
+2020年3月11日18:39:23
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    let student = {
+        name: 'xr',
+        phone: [
+            {
+                name: 'iphoneXr',
+                price: 6999
+            },
+            {
+                name: 'iphone6',
+                price: 2333,
+                developer: {
+                    address: 'USA',
+                    phoneNumber: 1323221231,
+                }
+            }
+        ],
+    }
+
+    // todo:需求：获取该用户所有手机的developer的address,没有就用null处理。
+
+    let obj1 = {
+        name:'123'
+    }
+
+    console.log(obj1.name.toString())
+    //
+    let test = {
+        f0:'ok',
+        f1:null,
+        f2:0,
+        f3:1,
+        f4:undefined,
+        f5:NaN,
+        f6:'',
+        f7:false,
+        f8:true,
+    }
+
+     // todo:html里面处理不了，尝试用react
+   // log(test?.f1)
+
+
+
+</script>
