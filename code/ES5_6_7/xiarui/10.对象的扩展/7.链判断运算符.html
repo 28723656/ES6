@@ -39,29 +39,57 @@
         ],
     }
 
-    // todo:需求：获取该用户所有手机的developer的address,没有就用null处理。
+    //todo:需求：获取该用户所有手机的developer的address,没有就用null处理。
+    // fixme:
 
     let obj1 = {
-        name:'123'
+        name: '123'
     }
 
     console.log(obj1.name.toString())
     //
     let test = {
-        f0:'ok',
-        f1:null,
-        f2:0,
-        f3:1,
-        f4:undefined,
-        f5:NaN,
-        f6:'',
-        f7:false,
-        f8:true,
+        f0: 'ok',
+        f1: null,
+        f2: 0,
+        f3: 1,
+        f4: undefined,
+        f5: NaN,
+        f6: '',
+        f7: false,
+        f8: true,
     }
 
-     // todo:html里面处理不了，尝试用react
-   // log(test?.f1)
+    // todo:html里面处理不了，尝试用react
+    // log(test?.f1)
 
+    // 左侧的对象是否为null或undefined。如果是的，就不再往下运算，而是返回undefined。
 
+    // 1.短路机制
+    let a = [1, 2, 3]
+    let c = 1
+    a?.[++c]
+    // 等同于   a== null ? undefined: a[++c]
+
+    // 2.delete 运算符
+    delete a?.b
+    // 等同于   a == null ? undefined : delete a.b
+
+    // 3.括号的影响
+    (a?.b).c
+    // 等同于  (a == null ? undefined: a.b).c
+
+    // 4.报错的场合
+    new a?.()
+    new a?.b()
+
+    a?.`{b}`
+
+    super?.()
+    super?.foo
+    a?.b = c
+
+    // （5）右侧不得为十进制数值
+    foo ? .3 : 0
 
 </script>

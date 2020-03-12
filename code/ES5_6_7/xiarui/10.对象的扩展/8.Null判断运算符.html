@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象
+2020年3月11日22:30:22
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 估计还是不能用。。
+    // ?? 它的行为类似||，但是只有运算符左侧的值为null或undefined时，才会返回右侧的值。
+    const result1 = false ?? 'ok';// 'ok'
+    log(result1)
+
+    // 混用的时候加上（）
+    (a && b) ?? c
+
+
+</script>

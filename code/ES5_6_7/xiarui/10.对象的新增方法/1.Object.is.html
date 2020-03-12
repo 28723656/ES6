@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象
+2020年3月11日22:30:22
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 一样的
+    let result1 = Object.is('aa','aa'); // true
+    let result2 = Object.is({},{}) // false
+    let result3 = 'aa' === 'aa'// true
+    let result4 = {} === {} // false
+    log(result1,result2,result3,result4)
+
+    // 来点不一样的
+    let result5 = Object.is(+0,-0);// false
+    let result6 = Object.is(NaN,NaN);// true
+    let result7 = +0 === -0;// true
+    let result8 = NaN === NaN;// false
+    log(result5,result6,result7,result8)
+
+
+
+
+</script>
