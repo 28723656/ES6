@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Symbol
+2020年3月14日17:25:38
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 1.魔术字符串，就是在代码中多次出现，与代码形成强耦合的具体字符串或者数值
+    function getArea (shape, options) {
+        let area = 0
+        switch (shape) {
+            case 'Triangle': // 魔术字符串
+                area = .5 * options.width * options.height
+                break
+            case 'Cicle':
+                area = Math.PI * Math.pow(options.radius, 2)
+                break
+            default:
+                return 0
+        }
+        return area
+    }
+
+    log(getArea('Triangle', { width: 3, height: 4 })) // 魔术字符串
+
+    // 2.消除魔术是付出
+    const shapeType = {
+        triangle: 'Triangle',
+        circle: 'Circle',
+    }
+
+    function getArea2 (shape, options) {
+        let area = 0
+        switch (shape) {
+            case shapeType.triangle: // 魔术字符串
+                area = .5 * options.width * options.height
+                break
+            case shapeType.circle:
+                area = Math.PI * Math.pow(options.radius, 2)
+                break
+            default:
+                return 0
+        }
+        return area
+    }
+
+    log(getArea2(shapeType.triangle, { width: 3, height: 4 })) // 魔术字符串
+
+    // 3.升级版，替换成Symbol
+    const shapeType3 = {
+        triangle: Symbol(),
+        circle: Symbol(),
+    }
+
+    function getArea3 (shape, options) {
+        let area = 0
+        switch (shape) {
+            case shapeType.triangle: // 魔术字符串
+                area = .5 * options.width * options.height
+                break
+            case shapeType.circle:
+                area = Math.PI * Math.pow(options.radius, 2)
+                break
+            default:
+                return 0
+        }
+        return area
+    }
+
+    log(getArea2(shapeType.triangle, { width: 3, height: 4 })) // 魔术字符串
+
+
+</script>

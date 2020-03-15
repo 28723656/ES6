@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Set
+2020年3月14日19:47:31
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    /*
+    理解：
+    WeakSet 结构与 Set 类似，也是不重复的值的集合。
+    但是，它与 Set 有两个区别。
+    1.首先，WeakSet 的成员只能是对象，而不能是其他类型的值。
+     */
+
+    // todo:搞清楚js中什么是对象，js中好像是没有数组的，我指的是 typeof xxx
+    // 1.只能存对象
+    const ws = new WeakSet()
+    //    ws.add(1) // 报错
+
+    const arr = [[1, 2], [3, 4]]
+    const ws1 = new WeakSet(arr)
+    log(ws1)
+    // 2.数组的成员只能是对象。
+    const arr2 = [3, 4]
+    // const ws2 = new WeakSet(arr2)  // 报错
+    //  log(ws2)
+
+    // WeakSet有三个方法
+    // add()  delete()  has()
+    // 同set，我就不举例子了
+
+    // 但是没有size属性
+
+
+</script>

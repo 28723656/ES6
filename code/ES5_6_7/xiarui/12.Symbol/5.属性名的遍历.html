@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Symbol
+2020年3月14日17:25:38
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    /*
+    Symbol 作为属性名，遍历对象的时候，该属性不会出现在for...in、for...of循环中
+    ，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。
+
+     */
+
+    const obj = {}
+    let a = Symbol('a')
+    let b = Symbol('b')
+    obj[a] = 'Hello'
+    obj[b] = 'World'
+    const objectSymbol = Object.getOwnPropertySymbols(obj)
+    log(objectSymbol)  //[Symbol(a),Symbol(b)]
+    objectSymbol.forEach(item => log(item.description))  // a b
+
+    // 另一个星的api，Reflect.ownKeys()方法可以返回所有类型的键名，包括常规键名和 Symbol 键名。
+
+    let obj2 = {
+        [Symbol('haha')]: 1,
+        name: 2
+    }
+
+    const result = Reflect.ownKeys(obj2);
+    log(result)  //  ["name", Symbol(haha)]
+
+
+    /*
+    由于以 Symbol 值作为键名，不会被常规方法遍历得到。
+    我们可以利用这个特性，为对象定义一些非私有的、但又希望只用于内部的方法。
+     */
+    // todo:这个需要理解一下
+
+    let size = Symbol('size');
+
+    class Collection {
+        constructor() {
+            this[size] = 0;
+        }
+
+        add(item) {
+            this[this[size]] = item;
+            this[size]++;
+        }
+
+        static sizeOf(instance) {
+            return instance[size];
+        }
+    }
+
+    let x = new Collection();
+    Collection.sizeOf(x) // 0
+
+    x.add('foo');
+    Collection.sizeOf(x) // 1
+
+    Object.keys(x) // ['0']
+    Object.getOwnPropertyNames(x) // ['0']
+    Object.getOwnPropertySymbols(x) // [Symbol(size)]
+
+
+
+
+
+</script>

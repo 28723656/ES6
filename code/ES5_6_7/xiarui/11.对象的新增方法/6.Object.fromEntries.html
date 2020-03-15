@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象
+2020年3月14日15:33:39
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // Object.fromEntries()方法是Object.entries()的逆操作，用于将一个键值对数组转为对象。
+    // what? 还有这种操作。。。
+
+    const obj = {
+        name: 'XR',
+        sex: 0,
+        age: 24,
+        hobby: ['read', 'game', 'dream'],
+        phones: {
+            name: 'iphoneXr',
+            color: 'white'
+        }
+    }
+    const entries = Object.entries(obj)
+    log(entries)
+    /*
+     [
+      ["name", "XR"]
+     ["sex", 0]
+     ["age", 24]
+     ["hobby", Array(3)]
+     ["phones", {…}]
+    ]
+
+     */
+    const fromEntries = Object.fromEntries(entries)
+    log(fromEntries) // 变成了原来的对象
+
+    let obj3 = { a: { b: 2, c: 3, d: { e: 4, f: 5 } } }
+
+    log(obj3?.a?.b)
+
+</script>

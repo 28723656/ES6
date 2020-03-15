@@ -87,8 +87,43 @@
     上面代码中，source对象的foo属性是一个取值函数，Object.assign不会复制这个取值函数，只会拿到值以后，将这个值复制过去。
      */
 
-     // 常见用途
+    // 常见用途
     // (1) 为对象添加属性
+    class Point {
+        constructor (x, y) {
+            Object.assign(this, { x, y })
+        }
+    }
+
+    // (2) 为对象添加方法(感觉不常用，先不写了)
+
+    // (3) 克隆对象   不能克隆继承的值
+    function clone (origin) {
+        return Object.assign({}, origin)
+    }
+
+    // 下面这个代码可以克隆继承的值
+    function clone2 (origin) {
+        let originProto = Object.getPrototypeOf(origin)
+        return Object.assign(Object.create(originProto), origin)
+    }
+
+    // (4) 合并多个对象
+    const merge = (target, ...sources) => Object.assign(target, ...sources)
+
+    // (5) 为属性指定默认值
+
+    const DEFAULT = {
+        name: '张三',
+        age: 12,
+    }
+
+    function getStudent (options) {
+        options = Object.assign({}, DEFAULT, options)
+        log(options)
+    }
+
+    // 注意的问题，因为是浅拷贝，所以如果options为某个和default重名的对象，会直接覆盖这个对象
 
 
 </script>

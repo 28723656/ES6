@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象
+2020年3月14日15:11:36
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 意思就是，尽量不要使用.__proto__方法，二十用他提供的方法
+    // Object.setPrototypeOf()
+    const obj = Object.setPrototypeOf({}, null)
+
+    // 等同于
+    function setPrototypeOf (obj, proto) {
+        obj.__proto__ = proto
+        return obj
+    }
+
+    // 另一个例子
+    let proto = {}
+    let obj2 = { x: 10 }
+    Object.setPrototypeOf(obj2, proto)
+    proto.y = 20
+    proto.z = 40
+    log(obj2.x) // 10
+    log(obj2.y) // 20
+    log(obj2.z) // 30
+    log(obj2)  // {x:10}
+
+    // Object.getProrotypeOf()
+    log(Object.getPrototypeOf(obj2))  // {y: 20, z: 40}
+
+
+</script>

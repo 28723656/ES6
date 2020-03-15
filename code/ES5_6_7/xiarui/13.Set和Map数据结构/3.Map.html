@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Map
+2020年3月15日15:21:11
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    /*
+    说明：
+    1.键的范围不限于字符串，各种类型的值（包括对象) 都可以当做键
+     */
+
+    // 举例，以object为键
+    const map = new Map()
+    const obj = { words: 'Hello World' }
+
+    map.set(obj, 'content')
+    log(map.get(obj)) // content
+
+    log(map.has(obj))  // true
+    log(map.delete(obj))  // true
+    log(map.has(obj))  // false
+
+    // map的构造
+    const map1 = new Map(
+        [['name', '张三'], ['age', 12]]
+    )
+    log(map1.size)  // 2
+    log(map1.has('name')) // true
+    log(map1.get('name')) // 张三
+
+    /*
+    事实上，不仅仅是数组，任何具有 Iterator 接口、且每个成员都是一个双元素的数组的数据结构（详见《Iterator》一章）都可以当作Map构造函数的参数。
+    这就是说，Set和Map都可以用来生成新的 Map。
+     */
+
+    const set2 = new Set([
+        ['foo', 1], ['zoo', 2]
+    ])
+    const map2 = new Map(set2)
+    log(map2.get('zoo')) // 2
+
+    // 和java一样，后面的会覆盖前面的
+    // 简单的我就不测试了，我测试一下对象
+    const map3 = new Map()
+    map3.set({}, 'haha')
+    map3.set({}, 'xixi')
+    log(map3.size)
+    log(map3.get({})) // undefined ,把对象换成数组也是一样的结果
+
+    // 所以可以看出，map的键其实是和内存地址绑定的
+
+    // 和set一样，有size get set has delete clear
+
+    // important: map转数组
+    const mapToArray = new Map(
+        [
+            ['name', '矢口春雄'],
+            ['age', 12]
+        ],
+    )
+
+    log([...mapToArray.keys()])
+    log([...mapToArray.values()])
+    log([...mapToArray.entries()])
+    log([...mapToArray])
+
+    // 同set，map没有map和filter方法
+    // 同set，map有forEach方法
+
+    /*
+     Map与其他数据结构的转换
+     */
+    // important: 转换关系
+
+    // 1.Map 转为数组
+    const myMap = new Map().set(true, 7)
+        .set({ foo: 3 }, ['abc'])
+    const result1 = [...myMap]
+
+    // 2. 数组转成map
+    new Map([
+        [true, 7],
+        [{ foo: 3 }, ['abc']]
+    ])
+
+    //3. Map转成对象
+
+    function strMapToObj (strMap) {
+        let obj = Object.create(null)
+        for (let [k, v] of strMap) {
+            obj[k] = v
+        }
+        return obj
+    }
+
+    const myMap2 = new Map()
+        .set('yes', true)
+        .set('no', false)
+    strMapToObj(myMap2)
+
+    // 4.对象转Map
+    let obj4 = { a: 1, b: 3 }
+    let map4 = new Map(Object.entries(obj4))
+    log(map4)
+
+    // 也可以自己实现一个转换器
+    function objToStrMap (obj) {
+        let strMap = new Map()
+        for (let k of Object.keys(obj)) {
+            strMap.set(k, obj[k])
+        }
+        return strMap
+    }
+
+    objToStrMap({ yes: true, no: false })
+
+    // 5.Map转Json
+    // 分两种情况1.map的键名都是字符串
+    function strMapToJson (strMap) {
+        return JSON.stringify(strMapToObj(strMap))
+    }
+
+    let myMap5 = new Map().set('yes', true).set('no', false)
+    strMapToJson(myMap5)
+
+    // 第二种情况，map的键名字都是非字符串
+    function mapToArrayJson (map) {
+        return JSON.stringify([...map])
+    }
+
+    let myMap6 = new Map().set(true, 7).set({ foo: 3 }, ['abc'])
+    mapToArrayJson(myMap6)
+    // '[[true,7],[{"foo":3},["abc"]]]'
+
+    // 6.json转map
+    // 第一种，正常情况下，所有的键名都是字符串
+    function jsonToStrMap (jsonStr) {
+        return objToStrMap(JSON.parse(jsonStr))
+    }
+
+    jsonToStrMap('{"yes": true, "no": false}')
+    // Map {'yes' => true, 'no' => false}
+
+    // 第二种，非字符串
+    function jsonToMap (jsonStr) {
+        return new Map(JSON.parse(jsonStr))
+    }
+
+    jsonToMap('[[true,7],[{"foo":3},["abc"]]]')
+    // Map {true => 7, Object {foo: 3} => ['abc']}
+
+</script>

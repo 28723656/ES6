@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象
+2020年3月11日22:30:22
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // ES2017 引入了Object.getOwnPropertyDescriptors()方法，返回指定对象所有自身属性（非继承属性）的描述对象。
+
+    const obj = {
+        foo:123,
+        get bar() {return 'abc'}
+    }
+
+    log(Object.getOwnPropertyDescriptors(obj))
+    /*
+
+   { foo:
+    { value: 123,
+      writable: true,
+      enumerable: true,
+      configurable: true },
+   bar:
+    { get: [Function: get bar],
+      set: undefined,
+      enumerable: true,
+      configurable: true } }
+
+     */
+
+
+    // 引入这个方法的目的，是为了解决Object.assign() 无法正确拷贝get和set属性
+    const source = {
+        set foo(value){
+            log(value)
+        }
+    }
+
+    const target1 = {};
+    Object.assign(target1,source)
+    log(Object.getOwnPropertyDescriptor(target1,'foo'))
+    /*
+   { configurable: true
+enumerable: true
+value: undefined
+writable: true
+}
+
+     */
+
+
+    // todo:这里还需要以后再理解理解，理解万岁
+    // 实现拷贝 get 和 set
+
+    const source2 = {
+        set foo(value){
+            log(value)
+        }
+    }
+
+    const target2 = {};
+    Object.defineProperties(target2,Object.getOwnPropertyDescriptors(source2));
+    Object.getOwnPropertyDescriptor(target2,'foo');
+    // { get: undefined,
+    //   set: [Function: set foo],
+    //   enumerable: true,
+    //   configurable: true }
+
+
+    // 上面的写法可以简写成：
+    const shallowMerge = (target, source) => Object.defineProperties(
+        target,
+        Object.getOwnPropertyDescriptors(source)
+    );
+
+
+
+
+
+</script>

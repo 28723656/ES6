@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Symbol
+2020年3月14日17:25:38
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+    // 有时，我们希望重新使用同一个 Symbol 值，Symbol.for()方法可以做到这一点。
+    // 区别
+    log(Symbol.for('haha') === Symbol.for('haha'))  // true
+    log(Symbol('haha') === Symbol('haha'))  // false
+
+    // Symbol.keyFor()
+    let s1 = Symbol.for('zoo')
+    const result = Symbol.keyFor(s1) // zoo
+    log(result)
+
+    let s2 = Symbol('koo')
+    const result2 = Symbol.keyFor(s2) // undefined
+    log(result2)
+
+    // 注意，Symbol.for()为 Symbol 值登记的名字，是全局环境的，不管有没有在全局环境运行。
+
+    function f () {
+        return Symbol.for('test')
+    }
+
+    log(Symbol.keyFor(f()))
+
+
+</script>

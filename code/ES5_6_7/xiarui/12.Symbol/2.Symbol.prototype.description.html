@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Symbol
+2020年3月14日17:09:56
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    const s1 = Symbol('test')
+    // 读取这个字符串
+    // es2019
+    log(s1.description) // test
+
+
+
+
+
+
+
+</script>

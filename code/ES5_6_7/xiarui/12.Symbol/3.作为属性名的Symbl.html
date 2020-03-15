@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Symbol
+2020年3月14日17:25:38
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 作为属性名可以作为唯一标识
+    let fieldName = Symbol()
+    let fieldName2 = Symbol()
+
+    // 第一种写法
+    let a = {}
+    a[fieldName] = 'Hello'
+    log(a) // {Symbol(): "Hello"}
+
+    // 第二种写法
+    let b = {
+        [fieldName]: 'Hello',
+        [fieldName2]: 'Hello2',
+    }
+
+    // fixme:第三种写法(需要深入的学习Object的属性)
+    let c = {}
+    Object.defineProperty(c, fieldName, { value: 'Hello' })
+
+    log(a[fieldName], b[fieldName], c[fieldName])  // Hello
+    log(b)  // {Symbol(): "Hello", Symbol(): "Hello2"}
+
+    // 注意，Symbol值作为对象属性名的时候，不能用点运算符
+    const s1 = Symbol()
+    const obj1 = {}
+
+    obj1.s1 = 'Hello'
+    log(obj1) // {s1:'Hello'}  并不是symbol对象
+    log(obj1[s1]) // undefined
+    log(obj1['s1'])
+
+    // 注意  ： Symbol必须放在方括号之间
+
+    // 其他用法，就像枚举一样
+    const logInfo = {}
+    logInfo.levels = {
+        DEBUG: Symbol('debug'),
+        INFO: Symbol('info'),
+        WARN: Symbol('warn')
+    }
+    log(logInfo.levels.DEBUG)
+
+    // 另一个例子
+
+    const RED = Symbol('red')
+    const BLUE = Symbol('blue')
+    const DEFAULT = Symbol('black')
+
+    function getColor (color) {
+
+        switch (color) {
+            case RED:
+                return RED.description
+            case BLUE:
+                return BLUE.description
+            default:
+                return DEFAULT.description
+        }
+    }
+
+    log(getColor(RED))
+
+
+</script>

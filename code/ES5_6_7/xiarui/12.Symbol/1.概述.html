@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Symbol
+2020年3月14日17:09:56
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 主要是为了独一无二
+    // 复习一下，javascript的基本类型
+    /*
+    undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。
+    第七种：symbol
+
+     */
+
+    // 1.初体验
+    let s = Symbol();
+    log(typeof s) // symbol
+
+    let s1 = Symbol('foo')
+    log(s1) // Symbol(foo)
+    log(s1.toString()) // Symbol(foo)
+
+    let s2 = Symbol('foo')
+
+    log(Object.is(s1,s2)) // false
+    log(s1===s2)  // false
+
+
+    // Symbol 值不能与其他类型的值进行运算，会报错。
+    let s3 = Symbol('test');
+   // log('what fu...k'+s3);
+    // 但是可以转换成字符串
+    log(String(s3))  //Symbol(test)
+    log(s3.toString()+'haha') // Symbol(test)haha
+
+
+
+
+
+
+</script>

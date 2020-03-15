@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+对象
+2020年3月14日15:11:36
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    const obj = { a: 'aaa', b: 'bbb' }
+    log(Object.keys(obj))  // ['a','b']
+    log(Object.values(obj))  // ['aaa','bbb']
+    log(Object.entries(obj)) // [['a','aaa'],['b','bbb']]
+    // 遍历一下
+    for (let [key, value] of Object.entries(obj)) {
+        log([key, value])
+    }
+
+    // Object.values()
+    const obj1 = { 100: 'a', 2: 'b', 5: 'c' }
+    log(Object.values(obj1))  // ['b','c','a']
+    log(Object.values('foo')) // ['f','o','o']
+    log(Object.values(23)) // []
+    log(Object.values(true)) // []
+
+    // Object.entries()
+
+    const obj2 = { a: '艾克', name: '让我康康', age: 15 }
+    log(Object.entries(obj2)) //[ ["a", "艾克"],["name", "让我康康"], ["age", 15] ]
+
+    // 用途
+    const map = new Map(Object.entries(obj2))
+    log(map)  // {"a" => "艾克", "name" => "让我康康", "age" => 15}
+
+    // fixme: 日后在细看：自己实现entries()
+    // Generator函数的版本
+    function * entries (obj) {
+        for (let key of Object.keys(obj)) {
+            yield [key, obj[key]]
+        }
+    }
+
+    // 非Generator函数的版本
+    function entries (obj) {
+        let arr = []
+        for (let key of Object.keys(obj)) {
+            arr.push([key, obj[key]])
+        }
+        return arr
+    }
+
+
+</script>
