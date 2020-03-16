@@ -88,6 +88,38 @@ Promise
 
 
 
+    // 练习4：
+    const p1 = new Promise(function (resolve, reject) {
+        setTimeout(() => reject(new Error('fail')), 3000)
+    })
+
+    const p2 = new Promise(function (resolve, reject) {
+        setTimeout(() => resolve(p1), 1000)
+    })
+
+    p2
+        .then(result => console.log(result))
+        .catch(error => console.log(error))
+    // Error: fail
+
+
+    // 练习5： 调用resolve或者reject并不会终结Promise的参数函数的执行
+    new Promise((resolve, reject) => {
+        resolve(1);
+        console.log(2);
+    }).then(r => {
+        console.log(r);
+    });
+    // 2
+    // 1
+
+    // 所以最好这样
+    new Promise((resolve, reject) => {
+        return resolve(1);
+        // 后面的语句不会执行
+        console.log(2);
+    })
+
 
 
 
