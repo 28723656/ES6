@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Promise
+2020年3月16日18:50:31
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // then方法的第一个参数是resolved状态的回调函数，
+    // 第二个参数（可选）是rejected状态的回调函数。
+
+    // then方法返回的是一个新的Promise实例（注意，不是原来那个Promise实例）。
+    // 因此可以采用链式写法，即then方法后面再调用另一个then方法。
+    /*    getJSON("/post/1.json").then(function(post) {
+            return getJSON(post.commentURL);
+        }).then(function (comments) {
+            console.log("resolved: ", comments);
+        }, function (err){
+            console.log("rejected: ", err);
+        });*/
+
+    // 可以看出
+    // 1.then后面可以接then
+    // 2.then里面可以有两个参数 (都是function) 前面是resolved,后面是rejected
+
+    // 练习一
+    function add (a, b) {
+        return a + b
+    }
+
+    function addAjax (num1, num2) {
+        return new Promise((resolve, reject) => {
+            const result = add(num1, num2)
+            if (result > 10) {
+                setTimeout(reject, 1000, result)
+            } else {
+                setTimeout(resolve, 1000, result)
+            }
+            // log(add(1,1))
+
+        })
+    }
+
+    addAjax(10, 20).then(
+        value => log('正确', value),
+        error => log('异常', error))
+
+    log(add(6, 6))
+
+    // 练习二： 多个then
+    // 结论，后面的then会用前面的结果
+
+    addAjax(1, 2)
+        .then(value1 => addAjax(value1, value1))  // 3+3
+        .then(value2 => addAjax(value2, value2))  // 6+6
+        .then(value3 => addAjax(value3, value3))  // 12 + 12
+        .then(value4 => log(value4)) // 24
+
+
+</script>

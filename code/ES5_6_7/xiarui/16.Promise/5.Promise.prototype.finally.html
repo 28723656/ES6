@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Promise
+2020年3月16日23:39:15
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 不管promise最后的状态，在执行完then或catch指定的回调函数以后，都会执行finally方法指定的回调函数。
+
+    // 你以为很高大上，其实finally就是这个
+    const promise = new Promise((resolve,reject) => {
+        log('promise')
+        resolve();
+    })
+
+    promise.finally(() => log('我是finally'))
+
+    // 等同于
+    promise.then(() => log('评定有没resolve'))
+        .catch(() => log('判定有没reject'))
+
+
+</script>

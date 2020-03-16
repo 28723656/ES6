@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Promise
+2020年3月16日23:39:15
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 练习一
+    function add (a, b) {
+        return a + b
+    }
+
+    function addAjax (num1, num2) {
+        return new Promise((resolve, reject) => {
+            const result = add(num1, num2)
+            if (result > 10) {
+                setTimeout(reject, 1000, result - 8)
+            } else {
+                setTimeout(resolve, 1000, result)
+            }
+        })
+    }
+
+    // 练习二： 多个then
+    // 结论，后面的then会用前面的结果
+    // Promise.prototype.catch方法是
+    // .then(null, rejection)
+    // 或.then(undefined, rejection)的别名，用于指定发生错误时的回调函数。
+
+    addAjax(1, 2)
+        .then(value1 => addAjax(value1, value1))  // 3+3
+        .then(value2 => addAjax(value2, value2))  // 6+6    // 异常
+        .catch(error => {
+            log('错误:-5')
+            return addAjax(error, error)
+        }).catch(error => {
+        log('错误:-5')
+        return addAjax(error, error)
+    })
+
+    // bad
+    addAjax(5, 6).then(right => log('正确'),err => log('错误'))
+
+    // good
+    addAjax(5, 6).then(right => log('正确'))
+        .catch(err => log('这样写才好'))
+
+
+    // 例子：关于promise内部的错误处理方式
+    function errorFunction(){
+        return new Promise((resolve,reject) =>{
+            // tip: 内部把这个异常给吞了，我xyz没有申明，也没有报错
+            resolve(xyz/0);
+        })
+    }
+    errorFunction().then((right) => log('正常输出了'))
+        .catch(error => log('我是不可能输出的，哈哈'))
+    setTimeout(() => {log('我等下再输出吧，前面的错误并没有影响我')},3000)
+
+
+
+</script>
