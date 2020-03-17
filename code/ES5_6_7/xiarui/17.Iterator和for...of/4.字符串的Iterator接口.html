@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Iterator和for...of循环
+2020年3月17日21:30:00
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // important: 字符串的Iterator接口
+    let someStr = 'Hello';
+    // 经过这一波神奇的操作
+    let iterator = someStr[Symbol.iterator]();
+
+    log(iterator.next())  // {value: "H", done: false}
+    log(iterator.next())
+    log(iterator.next())
+    log(iterator.next())
+    log(iterator.next())  // {value: "o", done: false}
+    log(iterator.next())  // {value: undefined, done: true}
+
+
+    // 覆盖原生的Symbol.iterator方法
+    let str = new String("hi");
+
+    [...str] // ["h", "i"]
+
+    str[Symbol.iterator] = function() {
+        return {
+            next: function() {
+                if (this._first) {
+                    this._first = false;
+                    return { value: "bye", done: false };
+                } else {
+                    return { done: true };
+                }
+            },
+            _first: true
+        };
+    };
+
+    [...str] // ["bye"]
+    str // "hi"
+
+
+</script>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Generator函数
+2020年3月17日22:26:47
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 例子一： 初体验
+    function * getGenerator () {
+        yield 'hello'
+        yield 'world'
+        return 'ending'
+    }
+
+    let generator = getGenerator()
+
+    log(generator.next())   // {value: "hello", done: false}
+    log(generator.next())   // {value: "world", done: false}
+    log(generator.next())   // {value: "ending", done: true}
+    log(generator.next())   // {value: undefined, done: true}
+
+    // 例子二 ：惰性求值
+    function * f () {
+        console.log('执行了！')
+    }
+
+    let generator2 = f()
+
+    setTimeout(function () {
+        generator2.next()
+    }, 2000)
+
+    // 例子三: yield只能放在generator函数里面，所以放在forEach遍历里面就是错的
+    let arr = [1, [[2, 3], 4], [5, 6]]
+
+    let flat = function * (a) {
+        let length = a.length
+        for (let i = 0; i < length; i++) {
+            let item = a[i]
+            if (typeof item !== 'number') {
+                yield * flat(item)
+            } else {
+                yield item
+            }
+        }
+    }
+
+    for (let f of flat(arr)) {
+        console.log(f)
+    }
+    // 1, 2, 3, 4, 5, 6
+
+    //例子4： 如果yield用在另一个表达式中，必须放在圆括号里面
+    function * demo () {
+        // console.log('Hello' + yield); // SyntaxError
+        // console.log('Hello' + yield 123); // SyntaxError
+
+        console.log('Hello' + (yield)) // OK
+        console.log('Hello' + (yield 123)) // OK
+    }
+
+    // yield表达式用作函数参数或放在赋值表达式的右边，可以不加括号。
+
+    function* demo() {
+        foo(yield 'a', yield 'b'); // OK
+        let input = yield; // OK
+    }
+
+    // 例子5： 与Iterator接口的关系
+    let myIterable = {};
+    myIterable[Symbol.iterator] = function* () {
+        yield 3;
+        yield 2;
+        yield 1;
+    }
+    log([...myIterable])
+
+
+</script>

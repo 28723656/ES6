@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Iterator和for...of循环
+2020年3月17日19:11:07
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    /*
+    原生具备 Iterator 接口的数据结构如下。
+
+    Array
+    Map
+    Set
+    String
+    TypedArray
+    函数的 arguments 对象
+    NodeList 对象
+     */
+
+    // doubt: 这里不懂
+    let arr = ['a', 'b', 'c']
+    let iter = arr[Symbol.iterator]()
+    log(iter.next()) // {value: "a", done: false}
+    log(iter.next()) // {value: "b", done: false}
+    log(iter.next()) // {value: "c", done: false}
+    log(iter.next()) // {value: undefined, done: true}
+
+    // 一个对象如果要具备可被for...of循环调用的 Iterator 接口，就必须在Symbol.iterator的属性上部署遍历器生成方法（原型链上的对象具有该方法也可）。
+    class RangeIterator {
+        constructor (start, stop) {
+            this.value = start
+            this.stop = stop
+        }
+
+        [Symbol.iterator] () { return this }
+
+        next () {
+            let value = this.value
+            if (value < this.stop) {
+                this.value++
+                return { done: false, value: value }
+            }
+            return { done: true, value: undefined }
+        }
+    }
+
+    function range (start, stop) {
+        return new RangeIterator(start, stop)
+    }
+
+    for (let value of range(0, 3)) {
+        console.log(value) // 0, 1, 2
+    }
+
+    // 在对象上添加Iterator接口的例子,对象的遍历
+    let obj = {
+        data: ['hello', 'world'],
+        [Symbol.iterator] () {
+            const self = this
+            let index = 0
+            return {
+                next () {
+                    if (index < self.data.length) {
+                        return {
+                            value: self.data[index++],
+                            done: false
+                        }
+                    } else {
+                        return { value: undefined, done: true }
+                    }
+                }
+            }
+        }
+    }
+
+    for (let o of obj) {
+        log(o)
+    }
+
+
+    // homework:可以尝试写一个工具类，实现任意对象的遍历
+
+</script>

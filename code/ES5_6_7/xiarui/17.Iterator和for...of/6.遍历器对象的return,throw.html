@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Iterator和for...of循环
+2020年3月17日21:30:00
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    /**
+     * 遍历器对象除了具有next方法，还可以具有return方法和throw方法。
+     * 如果你自己写遍历器对象生成函数，那么next方法是必须部署的，return方法和throw方法是否部署是可选的。
+     */
+
+    // 不多BB，直接看代码
+    function readLinesSync (arr) {
+        return {
+            [Symbol.iterator] () {
+                return {
+                    next () {
+                        return { done: false }
+                    },
+                    return () {
+                        arr = []
+                        return { done: true }
+                    }
+                }
+            },
+        }
+    }
+
+    // 然后下面两种情况会触发return,不是很懂
+
+    let arr = [1, 2, 3]
+
+    // 情况一
+    for (let line of readLinesSync(arr)) {
+        console.log(line)
+        break
+    }
+
+    // 情况二
+    for (let line of readLinesSync(arr)) {
+        console.log(line)
+        throw new Error()
+    }
+
+
+</script>

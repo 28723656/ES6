@@ -21,24 +21,23 @@ Iterator和for...of循环
         log('\t', ...filed)
     }
 
-    // 初步体验
-    function * getGenerator () {
-        yield 'hello'
-        yield 'world'
-        return 'end'
+    // 免得什么都没有，这里模拟一个吧
+    let it = makeIterator(['a', 'b'])
+
+    it.next() // { value: "a", done: false }
+    it.next() // { value: "b", done: false }
+    it.next() // { value: undefined, done: true }
+
+    function makeIterator (array) {
+        var nextIndex = 0
+        return {
+            next: function () {
+                return nextIndex < array.length ?
+                    { value: array[nextIndex++], done: false } :
+                    { value: undefined, done: true }
+            }
+        }
     }
-
-    let gen = getGenerator()
-    console.log(gen.next())  // {value: "hello", done: false}
-    console.log(gen.next())  // {value: "world", done: false}
-    console.log(gen.next())  // {value: "end", done: true}
-    console.log(gen.next())  // {value: undefined, done: true}
-
-
-    // 推荐function* getGenerator (){}    把*写在function后面
-
-
-
 
 
 </script>
