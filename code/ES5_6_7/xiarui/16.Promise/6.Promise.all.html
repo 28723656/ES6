@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Promise
+2020年3月16日23:39:15
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // important: 很重要，这几个方法搞清楚
+    // Promise.all()方法用于将多个 Promise 实例，包装成一个新的 Promise 实例,返回的是所有请求的集合数组
+
+    function getPromise (number = 0) {
+        return new Promise((resolve, reject) => {
+            if (!number) {
+                number = Math.floor(Math.random() * 10)
+            }
+            const arr = []
+            for (let i = 0; i < number; i++) {
+                arr.push(Math.floor(Math.random() * 10))
+            }
+            if (number >= 8) {
+                setTimeout(reject, 1000, new Error('异常'))
+            } else {
+                setTimeout(resolve, 2000, arr)
+            }
+        })
+    }
+
+    const p1 = getPromise()
+    const p2 = getPromise()
+    const p3 = getPromise()
+
+    const p = Promise.all([p1, p2, p3]).then(res => {log(res)})
+        .catch(error => log('有错误'))
+
+    // 结果，res是[[],[],[]]
+    // 如果其中有一个报错了，就会走catch方法
+
+    // 另一个例子，注意，如果作为参数的 Promise 实例，自己定义了catch方法，那么它一旦被rejected，并不会触发Promise.all()的catch方法。
+    const p4 = getPromise(9).catch(err => log('p4错误了'))
+    const p5 = getPromise(5)
+    const p6 = Promise.all([p4, p5]).catch(error => log('我不输出了，因为，有人已经捕获异常了'))
+    // 结论是，如果p4报错，会调用自己的catch,如果p5报错，就会调用p6的catch
+
+</script>

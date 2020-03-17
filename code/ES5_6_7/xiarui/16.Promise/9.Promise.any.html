@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Promise
+2020年3月17日13:54:30
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // important: 很重要，这几个方法搞清楚
+    // Promise.race()方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。 目前只是一个提案
+    // 返回的是一个数组，每个里面是对象，具体看下面。而且不管有没有执行成功，都会返回，牛逼
+
+    function getPromise (number = 0, timeout = 1000) {
+        return new Promise((resolve, reject) => {
+            if (!number) {
+                number = Math.floor(Math.random() * 10)
+            }
+            const arr = []
+            for (let i = 0; i < number; i++) {
+                arr.push(Math.floor(Math.random() * 10))
+            }
+            if (number >= 8) {
+                setTimeout(reject, timeout, new Error('异常'))
+            } else {
+                setTimeout(resolve, timeout, arr)
+            }
+        })
+    }
+
+    const p1 = getPromise(9, 1000)
+    const p2 = getPromise(3, 1500)
+    const p3 = getPromise(4, 800)
+    // 不能使用。。
+    const p = Promise.any([p1, p2, p3]).then(res => log(res))  // 输出p3
+        .catch(error => log('异常了'))
+
+    // 下面的返回的结果
+
+
+</script>

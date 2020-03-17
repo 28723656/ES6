@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Promise
+2020年3月16日23:39:15
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // important: 很重要，这几个方法搞清楚
+    // Promise.race()方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。返回的是第一个改变状态的
+
+    function getPromise (number = 0, timeout = 1000) {
+        return new Promise((resolve, reject) => {
+            if (!number) {
+                number = Math.floor(Math.random() * 10)
+            }
+            const arr = []
+            for (let i = 0; i < number; i++) {
+                arr.push(Math.floor(Math.random() * 10))
+            }
+            if (number >= 8) {
+                setTimeout(reject, timeout, new Error('异常'))
+            } else {
+                setTimeout(resolve, timeout, arr)
+            }
+        })
+    }
+
+    const p1 = getPromise(9,200)
+    const p2 = getPromise(3,1500)
+    const p3 = getPromise(4,800)
+    const p = Promise.race([p1,p2,p3]).then(res => log(res))  // 输出p3
+        .catch(error => log('异常了'))
+
+</script>
