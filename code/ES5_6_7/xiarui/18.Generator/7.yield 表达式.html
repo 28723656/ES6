@@ -21,7 +21,95 @@ Generator函数
         log('\t', ...filed)
     }
 
+    //例子一： 不多说，直接看题
+    function * foo () {
+        yield 'a'
+        yield 'b'
+    }
 
+    function * bar () {
+        yield 'x'
+        // 手动遍历 foo()
+        for (let i of foo()) {
+            console.log(i)
+        }
+        yield 'y'
+    }
+
+    for (let v of bar()) {
+        console.log(v)
+    }
+    // x a b y
+
+    // 所以简单的写法可以这样
+    // 例子二
+    function * easyBar () {
+        yield 'x'
+        yield * foo()
+        yield 'y'
+    }
+
+    for (let v of bar()) {
+        console.log(v)
+    }
+
+    // 例子三： 如果yield*后面跟着一个数组，由于数组原生支持遍历器，因此就会遍历数组成员。
+
+    log('---')
+
+    function * gen () {
+        yield * ['a', 'b', 'c']
+    }
+
+    let result3 = gen()
+    log(result3.next()) // { value:"a", done:false }
+    log(result3.next()) // { value:"b", done:false }
+    log(result3.next()) // { value:"c", done:false }
+    log(result3.next()) // { value:undefined, done:true }
+
+    // 例子四： 任何数据结构，只要有Iterator接口，就可以被yield*遍历
+    // fixme:如果这个函数不懂的话，可以参考test/9.function里面的一个方法
+    let read = (function * () {
+        yield 'hello'
+        yield * 'hello'
+    })()
+
+    console.log(read.next().value)  // 'hello'
+    console.log(read.next().value)  // h
+    console.log(read.next().value)  // e
+
+    log('---')
+
+    // 例子五：
+    function * foo5 () {
+        yield 2
+        yield 3
+        return 'foo'
+    }
+
+    function * bar5 () {
+        yield 1
+        let v = yield * foo5()
+        console.log('v: ' + v)
+        yield 4
+    }
+
+    let it = bar5()
+
+    // 如果被代理的 Generator 函数有return语句，那么就可以向代理它的 Generator 函数返回数据。
+    it.next()
+    // {value: 1, done: false}
+    it.next()
+    // {value: 2, done: false}
+    it.next()
+    // {value: 3, done: false}
+    it.next()
+    // "v: foo"
+    // {value: 4, done: false}
+    it.next()
+    // {value: undefined, done: true}
+
+    // 例子六：如果你明白了上面的操作，那么下面的应该就很好理解
 
 
 </script>
