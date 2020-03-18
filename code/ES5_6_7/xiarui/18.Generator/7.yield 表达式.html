@@ -110,6 +110,17 @@ Generator函数
     // {value: undefined, done: true}
 
     // 例子六：如果你明白了上面的操作，那么下面的应该就很好理解
+    function * getGen1 () {
+        yield 'first'
+        yield 'second'
+        return 'end'
+    }
 
+    function * getGen2 (someGen) {
+        let result = yield * someGen
+        log(result)
+    }
+
+    log([...getGen2(getGen1())])
 
 </script>
