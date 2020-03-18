@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Generator函数
+2020年3月18日22:28:44
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+
+    // 例子一：
+    function* g() {}
+
+    g.prototype.hello = function () {
+        return 'hi!';
+    };
+
+    let obj = g();
+
+    obj instanceof g // true
+    obj.hello() // 'hi!'
+
+
+</script>

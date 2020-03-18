@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+async
+2020年3月18日22:28:44
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 普通方法，获得一个随机数1-10
+    function getRandomNumber () {
+        return Math.floor(Math.random() * 10 + 1)
+    }
+
+    // 普通方法，获取一个数组
+    function getRandomArray (number = 5) {
+        const arr = []
+        for (let i = 0; i < number; i++) {
+            arr.push(getRandomNumber())
+        }
+        return arr
+    }
+
+    // 异步方法，获取一个随机数
+    function getPromiseOfNumber (timeout = 2000) {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, timeout, getRandomNumber())
+        })
+    }
+
+    // 异步方法，获取一个数组
+    function getPromiseOfArray (timeout = 2000) {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, timeout, getRandomArray())
+        })
+    }
+
+    const generator2 = async function () {
+        const result1 =await getPromiseOfNumber();
+        log(result1,typeof result1)
+        const result2 =await getPromiseOfArray(result1)
+        log(result2)
+    }
+    log(generator2())
+
+
+</script>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Generator函数
+2020年3月18日22:28:44
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 1.异步操作同步化
+
+    // 2.控制流管理
+    //(1)最原始的那种
+    step1(function (value1) {
+        step2(value1, function (value2) {
+            step3(value2, function (value3) {
+                step4(value3, function (value4) {
+                    // Do something with value4
+                })
+            })
+        })
+    })
+
+    // (2)使用Promise
+    Promise.resolve(step1)
+        .then(step2)
+        .then(step3)
+        .then(step4)
+        .finally()
+
+    // (3) 使用generator 函数
+    function * longRunningTask (value1) {
+        try {
+            let value2 = yield step1(value1)
+            let value3 = yield step2(value2)
+            let value4 = yield step3(value3)
+            let value5 = yield step4(value4)
+            // Do something with value4
+        } catch (e) {
+            // Handle any error from step1 through step4
+        }
+    }
+
+    // （4）使用for of
+    let steps = [step1Func, step2Func, step3Func]
+
+    function * iterateSteps (steps) {
+        for (let i = 0; i < steps.length; i++) {
+            let step = steps[i]
+            yield step()
+        }
+    }
+
+    for (let step of iterateSteps(steps)) {
+        log(stop.id)
+    }
+
+    // (5) 部署Iterator接口
+    // 利用 Generator 函数，可以在任意对象上部署 Iterator 接口。
+
+    function * iterEntries (obj) {
+        let keys = Object.keys(obj)
+        for (let i = 0; i < keys.length; i++) {
+            let key = keys[i]
+            yield [key, obj[key]]
+        }
+    }
+
+    let myObj = { foo: 3, bar: 7 }
+
+    for (let [key, value] of iterEntries(myObj)) {
+        console.log(key, value)
+    }
+
+    // foo 3
+    // bar 7
+
+
+</script>

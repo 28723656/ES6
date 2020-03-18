@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Generator函数
+2020年3月18日22:28:44
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 状态机
+    // 例子一
+    let ticking = true;
+    let clock = function() {
+        if (ticking)
+            console.log('Tick!');
+        else
+            console.log('Tock!');
+        ticking = !ticking;
+    }
+
+    // 例子二
+    let clock2 = function *(){
+        while(true){
+            log('Tick')
+            yield ;
+            log('Tock');
+            yield ;
+        }
+    }
+
+    function* gen() {
+        yield 1;
+        return 2;
+    }
+
+    let g = gen();
+
+    console.log(
+        g.next().value,
+        g.next().value,
+    );
+
+
+</script>
