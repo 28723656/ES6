@@ -11,6 +11,13 @@
 -->
 <script type="text/javascript">
 
+    let [prev, curr] = [0, 1];
+    for(let i = 1;i<=5;i++){
+        [prev, curr] = [curr, prev + curr];
+        console.log([prev,curr])
+    }
+
+
 
 </script>
 </body>

@@ -12,8 +12,32 @@
 -->
 <script type="text/javascript">
 
-    const obj = {name:'张三'}
+    const obj = {name:'张三',age:12}
     console.log('name' in obj)  // true
+    console.log(Reflect.has(obj,'name'))
+    console.log(Object.keys(obj))
+
+    // 对象的遍历 for in
+    for (let stu in obj){
+        console.log(stu,':',obj[stu])
+    }
+
+    // 对象的遍历 for of
+    function* objectEntries(obj) {
+        let propKeys = Reflect.ownKeys(obj);
+
+        for (let propKey of propKeys) {
+            yield [propKey, obj[propKey]];
+        }
+    }
+
+    let jane = { first: 'Jane', last: 'Doe' };
+
+    for (let [key, value] of objectEntries(jane)) {
+        console.log(`${key}: ${value}`);
+    }
+
+
 
 
 </script>

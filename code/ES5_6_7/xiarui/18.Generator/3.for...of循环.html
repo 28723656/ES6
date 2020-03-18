@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+Generator函数
+2020年3月18日11:40:54
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    //例子一： for...of循环可以自动遍历 Generator 函数运行时生成的Iterator对象，且此时不再需要调用next方法。
+    function * foo () {
+        yield 1
+        yield 2
+        yield 3
+        return 4
+    }
+
+    for (let i of foo()) {
+        log(i) // 1 2  3     并不会打印出4
+    }
+
+    // 例子二： 实现斐波那契数列的例子。
+    function * fibonacci () {
+        let [prev, curr] = [0, 1]
+        for (; ;) {
+            yield curr;
+            [prev, curr] = [curr, prev + curr]
+        }
+    }
+
+    for (let n of fibonacci()) {
+        console.log(n)
+        if (n > 1000) break
+    }
+
+    // 例子三： 实现用for of遍历对象
+    function * objectEntries (obj) {
+        let propKeys = Reflect.ownKeys(obj)
+
+        for (let propKey of propKeys) {
+            yield [propKey, obj[propKey]]
+        }
+    }
+
+    let jane = { first: 'Jane', last: 'Doe' }
+
+    for (let [key, value] of objectEntries(jane)) {
+        console.log(`${key}: ${value}`)
+    }
+    // first: Jane
+    // last: Doe
+
+    // 例子4：另一种实现方式，直接来遍历对象
+    function * objectEntries2 () {
+        let propKeys = Object.keys(this)
+
+        for (let propKey of propKeys) {
+            yield [propKey, this[propKey]]
+        }
+    }
+
+    let jane2 = { first: 'Jane2', last: 'Doe2' }
+
+    jane2[Symbol.iterator] = objectEntries2
+
+    for (let [key, value] of jane2) {
+        console.log(`${key}: ${value}`)
+    }
+    // first: Jane2
+    // last: Doe2
+
+    // todo:搞清楚Object.keys() 和Reflect.ownKeys() 的区别，先举例子，再看文档，symbol的区别吧
+
+    // 例子5： 其他循环
+    function * numbers () {
+        yield 1
+        yield 2
+        return 3
+        yield 4
+    }
+
+    // 扩展运算符
+    log([...numbers()]) // [1, 2]
+
+    // Array.from 方法
+    console.log(Array.from(numbers())) // [1, 2]
+
+    // 解构赋值
+    let [x, y] = numbers()
+    console.log([x, y])
+
+    // for...of 循环
+    for (let n of numbers()) {
+        console.log(n)
+    }
+    // 1
+    // 2
+
+
+</script>
