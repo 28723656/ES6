@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+async
+2020年3月19日10:15:42
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    function getAPromise (timeout = 2000) {
+        return new Promise((resolve, reject) => {
+            if (timeout > 5000) {
+                setTimeout(reject, timeout, timeout)
+            } else {
+                setTimeout(resolve, timeout, timeout)
+            }
+        })
+    }
+
+    // 第一点，前面已经说过，await命令后面的Promise对象，运行结果可能是rejected，所以最好把await命令放在try...catch代码块中。
+
+    async function myFunction1 () {
+        try {
+            await getAPromise()
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    // 另一种写法
+
+    async function myFunction2 () {
+        await getAPromise()
+            .catch(function (err) {
+                console.log(err)
+            })
+    }
+
+    // 第二点，多个await命令后面的异步操作，如果不存在等待关系，就让他们同时触发
+    // 例子一： 很慢
+    async function doOnSame1 () {
+        const before = new Date().getTime()
+        let result1 = await getAPromise()
+        let result2 = await getAPromise()
+        const end = new Date().getTime()
+        log('我输出了1', end - before)
+    }
+
+    // 例子二： 更快
+    async function doOnSame2 () {
+        const before = new Date().getTime()
+        let result1 = getAPromise()
+        let result2 = getAPromise()
+        let result3 = await result1
+        let result4 = await result2
+        const end = new Date().getTime()
+        log('我输出了2', end - before)
+    }
+
+    //例子三： 更高级
+    async function doOnSame3 () {
+        const before = new Date().getTime()
+        let [result1, result2] = await Promise.all([getAPromise(), getAPromise()])
+        const end = new Date().getTime()
+        log('我输出了3', end - before)
+    }
+
+    doOnSame1()
+    doOnSame2()
+    doOnSame3()
+
+    // 还有，并发与非并发执行
+    function dbFuc (db) { //这里不需要 async
+        let docs = [{}, {}, {}]
+
+        // 可能得到错误结果，因为这里是并发实行
+        docs.forEach(async function (doc) {
+            await getAPromise()
+        })
+    }
+
+    // 一个一个的执行
+    async function dbFuc2 (db) {
+        let docs = [{}, {}, {}]
+
+        for (let doc of docs) {
+            await getAPromise()
+        }
+    }
+
+    // 如果希望多个请求并发执行，用
+    async function manyFunc () {
+        let results = await Promise.all([getAPromise(), getAPromise()])
+        log(results)
+
+    }
+
+    // 第四点： async函数可以保留运行堆栈
+    // 例子四： 下面这个报错了，因为，a,已经结束了。Cannot read property 'then' of undefined
+    //function b () {return getAPromise()}
+    b = () => getAPromise() // 等同于上面，b是一个function
+    function c () {log('c')}
+
+    /*    const a = () => {
+            log('a')
+            b().then(() => c());
+        };
+        a();*/
+
+    // 下面改成async函数
+    const a1 = async () => {
+        log('a')
+        const result = await b()
+        console.log(result)
+        c()
+    }
+    a1()
+
+
+</script>

@@ -21,6 +21,8 @@ async
         log('\t', ...filed)
     }
 
+    // async函数的await命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时会自动转成立即 resolved 的 Promise 对象）。
+
     // 普通方法，获得一个随机数1-10
     function getRandomNumber () {
         return Math.floor(Math.random() * 10 + 1)

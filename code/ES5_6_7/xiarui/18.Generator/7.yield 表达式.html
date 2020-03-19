@@ -115,12 +115,10 @@ Generator函数
         yield 'second'
         return 'end'
     }
-
     function * getGen2 (someGen) {
         let result = yield * someGen
         log(result)
     }
-
     log([...getGen2(getGen1())])
 
     // 李子柒： （没想到 谐音竟然是例子七）
