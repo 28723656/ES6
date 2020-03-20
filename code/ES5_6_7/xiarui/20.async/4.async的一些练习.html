@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+async
+2020年3月20日11:22:04
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    const HOBBY = {
+        game: Symbol('game'),
+        swim: Symbol('swim'),
+        study: Symbol('study'),
+        play: Symbol('play'),
+    }
+
+    const PHONE = {
+        iPhoneXR: Symbol('iPhoneXR'),
+        iPhone6: Symbol('iPhone6'),
+        xiaomi: Symbol('xiaomi'),
+    }
+
+    // 1.学生对象
+    let studentList = [{
+        id: 1,
+        name: '张三',
+        age: 12,
+        hobby: [HOBBY.game.description, HOBBY.swim.description],
+        phone: [{
+            name: PHONE.iPhoneXR.description,
+            price: 4999,
+        }, {
+            name: PHONE.iPhone6,
+            price: 1999
+        }]
+    }]
+
+    /*
+    公用方法
+     */
+    // 获得学生idList
+    commonGetStudentIdList = (items) => items.map(item => item.id)
+
+    // homework :做一个异步增删改查的 用到async的功能
+
+    function timeoutException (timeout) {
+        if (timeout > 2000) {
+            return Promise.reject(new Error('超时异常'))
+        }
+    }
+
+    // 2.1添加学生
+    async function addStudent (student, timeout = 1000) {
+        return new Promise((resolve, reject) => {
+            // 1.id不同，随便插入
+            const list = commonGetStudentIdList(studentList)
+            if (list.includes(student.id)) {
+                setTimeout(reject, timeout, new Error('id重复'))
+            } else {
+                studentList.push(student)
+                setTimeout(resolve, timeout, studentList)
+            }
+        })
+    }
+
+    // 2.2删除学生(仅通过id删除)
+    async function deleteStudent (id, timeout = 1000) {
+        return new Promise((resolve, reject) => {
+            // 1.id不同，随便插入
+            const list = commonGetStudentIdList(studentList)
+            if (list.includes(id)) {
+                const index = studentList.findIndex(item => item.id === id)
+                studentList.splice(index, index + 1)
+                setTimeout(resolve, timeout, studentList)
+            } else {
+                setTimeout(reject, timeout, new Error('id不存在'))
+            }
+        })
+    }
+
+    // 2.3修改学生(传入要修改的属性(要有id))
+    async function updateStudent (updateObj, timeout = 1000) {
+        if (timeout > 2000) {
+            return Promise.reject(new Error('超时异常'))
+        }
+        return new Promise((resolve, reject) => {
+            // 1.id不同，随便插入
+            const list = commonGetStudentIdList(studentList)
+            const id = updateObj.id
+            if (list.includes(id)) {
+                const student = studentList.find(item => item.id === id)
+                const index = studentList.findIndex(item => item.id === id)
+                const newStudent = {
+                    ...student,
+                    ...updateObj,
+                }
+                studentList.splice(index, index + 1, newStudent)
+                setTimeout(resolve, timeout, studentList)
+            } else {
+                setTimeout(reject, timeout, new Error('id不存在'))
+            }
+        })
+    }
+
+    // 2.4 查询学生
+    async function findStudentList (timeout = 0) {
+        return new Promise((resolve, reject) => {
+            const list = commonGetStudentIdList(studentList)
+            setTimeout(resolve, timeout, studentList)
+        })
+    }
+
+    // 3.1需求：
+    // 1.插入学生
+    const newStudent = {
+        id: 2,
+        name: '张三丰',
+        age: 14,
+        hobby: [HOBBY.game.description],
+        phone: [{
+            name: PHONE.iPhoneXR.description,
+            price: 4999,
+        }, {
+            name: PHONE.iPhone6.description,
+            price: 1999
+        }]
+    }
+
+    // 2.把id为2的学生的name修改为'哈哈',age修改为16
+    // 3.获取刚刚修改完的id为2的学生，把id改为3,改一下name和age，然后插入
+    // 4.查询这所有的学生，输出学生的平均年龄
+
+    //
+    async function step () {
+        const studentList1 = await addStudent(newStudent)
+        log('1.添加了学生')
+
+        const studentList2 = await findStudentList()
+        const theStudent = studentList2.find(item => item.id === 2)
+        const updatedStudent = {
+            ...theStudent,
+            name: '哈哈',
+            age: 16,
+        }
+        const studentList3 = await updateStudent(updatedStudent, 1000)
+        log('2.修改了学生')
+
+        const theStudent3 = studentList3.find(item => item.id === 2)
+        const updatedStudent3 = {
+            ...theStudent3,
+            name: '新学生',
+            age: 18,
+            id: 3,
+        }
+        const studentList4 = await addStudent(updatedStudent3)
+        log('3.修改了并插入了学生')
+
+        const studentList5 = await findStudentList()
+        const allAge = studentList5.reduce((acc, cur) => (acc + cur.age), 0)
+        log('4.查询了学生,并计算平均年龄')
+        return allAge * 1.0 / 3.0
+    }
+
+   // step().then(res => log('平均年龄为:', res.toFixed(2))).catch(e => log('发生了异常:', e))
+
+    // 3.2.同步插入10个学生（）
+    async function addTenStudents1 () {
+        const before = new Date().getTime()
+        for (let i = 0; i < 10; i++) {
+            await addStudent({ ...newStudent, id: i + 11 })
+        }
+        const studentList3 = await findStudentList()
+        const after = new Date().getTime()
+        log('同步插入:', studentList3)
+        log('耗时', after - before, '毫秒')
+    }
+
+    // 3.3.异步插入10个学生（）
+    async function addTenStudents2 () {
+        const before = new Date().getTime()
+        let promises = []
+        for (let i = 0; i < 10; i++) {
+            promises.push(addStudent({ ...newStudent, id: i + 101 }))
+        }
+        await Promise.all(promises)
+        const studentList4 = await findStudentList()
+        const after = new Date().getTime()
+        log('异步插入1:', studentList4)
+        log('耗时', after - before, '毫秒')
+    }
+
+    // 3.4.异步插入10个学生（第二种方法）
+    async function addTenStudents3 () {
+        const before = new Date().getTime()
+        let promises = []
+        for (let i = 0; i < 10; i++) {
+            promises.push(addStudent({ ...newStudent, id: i + 1001 }))
+        }
+        for(let promise of promises){
+            await promise;
+        }
+        const studentList4 = await findStudentList()
+        const after = new Date().getTime()
+        log('异步插入2:', studentList4)
+        log('耗时', after - before, '毫秒')
+    }
+    addTenStudents1()
+    addTenStudents2()
+    addTenStudents3()
+
+    // 4.加上异常的情况的处理
+
+
+</script>
