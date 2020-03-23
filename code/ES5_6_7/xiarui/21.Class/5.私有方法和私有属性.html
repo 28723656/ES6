@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+class
+2020年3月23日12:16:34
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 目前，有一个提案，为class加了私有属性。方法是在属性名之前，使用#表示。
+    // 例子一：
+    class IncreasingCounter {
+        #count = 0;
+        get value() {
+            console.log('Getting the current value!');
+            return this.#count;
+        }
+        increment() {
+            this.#count++;
+        }
+    }
+
+    const counter = new IncreasingCounter();
+   // console.log(counter.#count)  // 报错
+    log(counter.value())
+
+
+    // 不能使用...例子二：还可以用用来写私有方法
+    class Foo {
+        #a;
+        #b;
+        constructor(a, b) {
+            this.#a = a;
+            this.#b = b;
+        }
+        #sum() {
+            return #a + #b;
+        }
+        printSum() {
+            console.log(this.#sum());
+        }
+    }
+
+    const foo = new Foo(1,2);
+    foo.printSum();
+
+
+</script>

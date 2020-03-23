@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+class
+2020年3月23日12:16:34
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    class IncreasingCounter {
+        _count = 0;
+        get value() {
+            console.log('Getting the current value!');
+            return this._count;
+        }
+        increment() {
+            this._count++;
+        }
+    }
+
+
+</script>

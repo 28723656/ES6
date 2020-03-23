@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+class
+2020年3月23日12:16:34
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    class Foo {
+    }
+
+    Foo.prop = 1;
+    log(Foo.prop) // 1
+
+    // 提案
+    // 新写法,可以用
+    class Foo2 {
+        static prop = 2;
+    }
+    log(Foo2.prop)
+
+
+
+</script>

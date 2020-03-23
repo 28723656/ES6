@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+class的继承
+2020年3月23日13:57:27
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    // 例子一
+    class A {
+        constructor () {
+            console.log(new.target.name)
+        }
+    }
+
+    class B extends A {
+        constructor () {
+            super()
+        }
+    }
+
+    new A() // A
+    new B() // B
+
+    // 例子二
+    class C {
+        p () {return 2}
+    }
+
+    class D extends C{
+        constructor () {
+            super()
+            log(super.p())
+        }
+    }
+
+    const d = new D();  // 2
+
+    // 例子三 这里需要注意，由于super指向父类的原型对象，所以定义在父类实例上的方法或属性，是无法通过super调用的。
+
+    class E {
+        constructor() {
+            this.p = 2;
+        }
+    }
+
+    class F extends E {
+        get m() {
+            return super.p;
+        }
+    }
+
+    let f = new F();
+    log(f.m) // undefined
+
+    // 例子四： ES6 规定，在子类普通方法中通过super调用父类的方法时，方法内部的this指向当前的子类实例。
+
+    class G {
+        constructor() {
+            this.x = 1;
+        }
+        print() {
+            console.log(this.x);
+        }
+    }
+
+    class H extends G {
+        constructor() {
+            super();
+            this.x = 2;
+        }
+        m() {
+            super.print();
+        }
+    }
+
+    let h = new H();
+    h.m() // 2
+
+
+</script>

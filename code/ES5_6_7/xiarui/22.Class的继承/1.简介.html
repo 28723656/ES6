@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+class的继承
+2020年3月23日13:57:27
+-->
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+    let log = (...filed) => {
+        const { log } = console
+        log('\t', ...filed)
+    }
+
+    class Father {
+        f_value = 6
+    }
+
+    class Son extends Father {
+        constructor (value) {
+            super()
+            this.value = value // 这里如果不调用super会报错
+        }
+
+        toString () {
+            return 'Son'
+        }
+    }
+
+    log(new Son().toString())
+    const son = new Son()
+    log(son instanceof Father)  // true
+    log(son instanceof Son)    // true
+    log(son.f_value)    // true
+
+    const father = new Father()
+    log(father instanceof Father)  // true
+    log(father instanceof Son)    // false
+
+
+</script>
