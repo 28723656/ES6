@@ -69,7 +69,6 @@ class的继承
     log(f.m) // undefined
 
     // 例子四： ES6 规定，在子类普通方法中通过super调用父类的方法时，方法内部的this指向当前的子类实例。
-
     class G {
         constructor() {
             this.x = 1;
@@ -85,7 +84,7 @@ class的继承
             this.x = 2;
         }
         m() {
-            super.print();
+            super.print();  // 指向this
         }
     }
 

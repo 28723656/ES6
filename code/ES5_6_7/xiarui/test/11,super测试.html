@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+类的测试
+
+-->
+<script type="text/javascript">
+
+    class A {
+       // x = 2;
+        constructor() {
+            this.x = 1;
+        }
+
+        changeValue(){
+            this.x = 6;
+        }
+
+        print() {
+            console.log(this.x);
+        }
+    }
+
+    class B extends A {
+        constructor() {
+            super();
+            super.x = 3;
+        }
+
+        get m(){
+            return super.x;
+        }
+
+        changeX (){
+            super.x = 4;
+        }
+
+        changeValue2 () {
+            super.changeValue();
+        }
+    }
+
+    let b = new B();
+    console.log(b.x) // 3
+    b.changeX();
+    console.log(b.x) // 4
+    console.log(b.m)  // undefined
+
+
+
+</script>
+</body>
+</html>
