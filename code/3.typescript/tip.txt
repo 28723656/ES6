@@ -1,0 +1,18 @@
+一、使用方法
+参考链接：https://www.cnblogs.com/wfaceboss/p/10043101.html
+1.setting -> tools -> file Watchers
+ 添加一个新的：
+        name:TypeScript
+        File type: TypeScript
+        program: 选到本地node下载的tsc.cmd
+        Arguments :--sourcemap --target "ES5"
+        Working directory: $FileDir$
+        然后下面，我是勾上第一个，和第二个
+2.setting -> Languages & Frameworks -> TypeScript ，勾上Recompile on changes。
+3.进入到F:\java1234\project\ES567\ES5_6_7\code\3.typescript 这个目录，使用命令： tsc --init初始化一个文件
+4.刷新会看到有一个名字叫tsconfig.json的文件,把这个配置文件里面的这个改成： "outDir": "./js",意思是编译后到js文件夹下
+
+
+二、功能说明
+1.我在ts文件夹中编写.ts代码，然后通过tsc自动编译成js代码（转es5），然后把js代码放在html的<script>标签中
+  然后运行html文件，在浏览器中查看刚刚编写的ts的内容。
